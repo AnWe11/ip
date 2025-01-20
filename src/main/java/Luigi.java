@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Luigi {
@@ -5,6 +7,17 @@ public class Luigi {
 
         //Initialisation of Scanner to read inputs from user
         Scanner scanner = new Scanner(System.in);
+
+        //Initialisation of input from user
+        String input;
+
+        //Initialisation of command words in the form of enum
+        enum Commands {
+            bye, list
+        }
+
+        //Initialisation of List array to store tasks elements
+        List<Tasks> tasksList = new ArrayList<Tasks>();
 
         //ASCII Art of Chatbot's name
         String luigiLogo = "_____________________________________________\n" +
@@ -29,24 +42,43 @@ public class Luigi {
         System.out.println(greeting);
 
         //Reads input from user and decides what to do
-        while(true) {
-            String input = scanner.nextLine();
+        do {
+            input = scanner.nextLine();
 
-            if (input.equalsIgnoreCase("goodbye") || input.equalsIgnoreCase("bye")) {
-                System.out.println(goodbye);
-                break;
+            switch(input) {
+                case "bye":
+                    System.out.println(goodbye);
+                    break;
+                case "list":
+                    listTasks(tasksList);
+                    break;
+                default:
+                    Tasks task = new Tasks(input);
+                    printDescription(task.getDescription());
+                    tasksList.add(task);
             }
-
-            Tasks task = new Tasks(input);
-            printDescription(task.getDescription());
-        }
+        } while (!input.equalsIgnoreCase("bye"));
     }
 
-    //Print task description
+    //Method to print task description
     public static void printDescription(String description) {
         System.out.println(
                 "\n_____________________________________________\n"
-                + description + "\n"
+                + "added: " + description + "\n"
                 + "_____________________________________________");
+    }
+
+    //Method to display items in List in sequential order
+    public static void listTasks(List<Tasks> tasksList) {
+        int count = 0;
+        StringBuilder str = new StringBuilder();
+        str.append("\n_____________________________________________\n");
+
+        for(Tasks entry : tasksList) {
+            count++;
+            str.append(count).append(". ").append(entry.getDescription()).append("\n");
+        }
+        str.append("_____________________________________________\n");
+        System.out.println(str.toString());
     }
 }
