@@ -1,5 +1,11 @@
+import java.util.Scanner;
+
 public class Luigi {
     public static void main(String[] args) {
+
+        //Initialisation of Scanner to read inputs from user
+        Scanner scanner = new Scanner(System.in);
+
         //ASCII Art of Chatbot's name
         String luigiLogo = "_____________________________________________\n" +
                 " _        _    _    _____    _____    _____  \n" +
@@ -10,17 +16,36 @@ public class Luigi {
                 "|______|  \\____/   |_____|  \\_____|  |_____| \n" +
                 "_____________________________________________";
 
-        System.out.println(luigiLogo);
-
         //Greeting string of Chatbot
         String greeting = "Hello! I am Luigi!\nWhat can I do for you?\n" +
-                "\n_____________________________________________";
-        System.out.println(greeting);
+                "_____________________________________________";
 
         //Goodbye string of Chatbot
         String goodbye = "Goodbye! Hope to see you again soon!"+
                 "\n_____________________________________________";
 
-        System.out.println(goodbye);
+        System.out.println(luigiLogo);
+
+        System.out.println(greeting);
+
+        while(true) {
+            String input = scanner.nextLine();
+
+            if (input.equalsIgnoreCase("goodbye") || input.equalsIgnoreCase("bye")) {
+                System.out.println(goodbye);
+                break;
+            }
+
+            Tasks task = new Tasks(input);
+            printDescription(task.getDescription());
+        }
+
+    }
+
+    public static void printDescription(String description) {
+        System.out.println(
+                "\n_____________________________________________\n"
+                + description + "\n"
+                + "_____________________________________________");
     }
 }
