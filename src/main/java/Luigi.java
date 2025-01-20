@@ -13,7 +13,7 @@ public class Luigi {
 
         //Initialisation of command words in the form of enum
         enum Commands {
-            bye, list
+            bye, list, mark, unmark
         }
 
         //Initialisation of List array to store tasks elements
@@ -34,49 +34,88 @@ public class Luigi {
                 "_____________________________________________";
 
         //Goodbye string of Chatbot
-        String goodbye = "Goodbye! Hope to see you again soon!"+
+        String goodbye = "\nGoodbye! Hope to see you again soon!"+
                 "\n_____________________________________________";
 
         System.out.println(luigiLogo);
 
         System.out.println(greeting);
 
-        //Reads input from user and decides what to do
         do {
+            //Reads input from user and decides what to do
             input = scanner.nextLine();
+            //Splits input string
+            String[] inputArray = input.split(" ");
+            //Initialisation of taskID and currTask which will only be initialised if the command is mark or unmark
+            int taskID = -1;
+            Tasks currTask = null;
+            /*
+            Check if the first word of the input is mark or unmark, if it is, it means that there already exists a
+            task. Then initialise the currTask to that task
+            */
+            if (inputArray[0].equalsIgnoreCase("mark") || inputArray[0].equalsIgnoreCase("unmark")) {
+                try {
+                    taskID = Integer.parseInt(inputArray[1]) - 1;
+                    if (taskID >= 0 && taskID < tasksList.size()) {
+                        currTask = tasksList.get(taskID);
+                    } else {
+                        System.out.println("Invalid task ID.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid taskID format.");
+                }
 
-            switch(input) {
+                currTask = tasksList.get(taskID);
+            }
+
+            //Switch statements to handle the different commands from the enum table
+            switch(inputArray[0].toLowerCase()) {
                 case "bye":
                     System.out.println(goodbye);
                     break;
                 case "list":
+                    System.out.println("Here are the tasks in your list:");
                     listTasks(tasksList);
+                    break;
+                case "mark":
+                    System.out.println("\n_____________________________________________");
+                    System.out.println("Nice work! I've marked this task as done:");
+                    if (currTask != null) {
+                        currTask.markAsDone();
+                    }
+                    System.out.println(currTask.getDescription());
+                    System.out.println("\n_____________________________________________\n");
+                    break;
+                case "unmark":
+                    System.out.println("\n_____________________________________________");
+                    System.out.println("Ok , I've unmarked this task:");
+                    if (currTask != null) {
+                        currTask.unmark();
+                    }
+                    System.out.println(currTask.getDescription());
+                    System.out.println("\n_____________________________________________\n");
                     break;
                 default:
                     Tasks task = new Tasks(input);
-                    printDescription(task.getDescription());
+                    printDescription(task);
                     tasksList.add(task);
             }
         } while (!input.equalsIgnoreCase("bye"));
     }
 
     //Method to print task description
-    public static void printDescription(String description) {
-        System.out.println(
-                "\n_____________________________________________\n"
-                + "added: " + description + "\n"
-                + "_____________________________________________");
+    public static void printDescription(Tasks task) {
+        System.out.println("_____________________________________________\n" + "added: ");
+        System.out.println(task.getDescription());
+        System.out.println("\n_____________________________________________\n");
     }
 
     //Method to display items in List in sequential order
     public static void listTasks(List<Tasks> tasksList) {
-        int count = 0;
         StringBuilder str = new StringBuilder();
         str.append("\n_____________________________________________\n");
-
         for(Tasks entry : tasksList) {
-            count++;
-            str.append(count).append(". ").append(entry.getDescription()).append("\n");
+            str.append(entry.getListDescription());
         }
         str.append("_____________________________________________\n");
         System.out.println(str.toString());
