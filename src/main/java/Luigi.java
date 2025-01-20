@@ -28,6 +28,7 @@ public class Luigi {
 
         System.out.println(greeting);
 
+        //Reads input from user and decides what to do
         while(true) {
             String input = scanner.nextLine();
 
@@ -39,9 +40,9 @@ public class Luigi {
             Tasks task = new Tasks(input);
             printDescription(task.getDescription());
         }
-
     }
 
+    //Print task description
     public static void printDescription(String description) {
         System.out.println(
                 "\n_____________________________________________\n"
