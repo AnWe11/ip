@@ -5,16 +5,16 @@ import java.util.Scanner;
 public class Luigi {
     public static void main(String[] args) {
 
+        //Initialisation of command words in the form of enum
+        enum Keywords {
+            bye, list, mark, unmark
+        }
+
         //Initialisation of Scanner to read inputs from user
         Scanner scanner = new Scanner(System.in);
 
         //Initialisation of input from user
         String input;
-
-        //Initialisation of command words in the form of enum
-        enum Commands {
-            bye, list, mark, unmark
-        }
 
         //Initialisation of List array to store tasks elements
         List<Tasks> tasksList = new ArrayList<Tasks>();
@@ -44,32 +44,10 @@ public class Luigi {
         do {
             //Reads input from user and decides what to do
             input = scanner.nextLine();
-            //Splits input string
-            String[] inputArray = input.split(" ");
-            //Initialisation of taskID and currTask which will only be initialised if the command is mark or unmark
-            int taskID = -1;
-            Tasks currTask = null;
-            /*
-            Check if the first word of the input is mark or unmark, if it is, it means that there already exists a
-            task. Then initialise the currTask to that task
-            */
-            if (inputArray[0].equalsIgnoreCase("mark") || inputArray[0].equalsIgnoreCase("unmark")) {
-                try {
-                    taskID = Integer.parseInt(inputArray[1]) - 1;
-                    if (taskID >= 0 && taskID < tasksList.size()) {
-                        currTask = tasksList.get(taskID);
-                    } else {
-                        System.out.println("Invalid task ID.");
-                    }
-                } catch (NumberFormatException e) {
-                    System.out.println("Invalid taskID format.");
-                }
-
-                currTask = tasksList.get(taskID);
-            }
+            Commands command = new Commands(input, tasksList);
 
             //Switch statements to handle the different commands from the enum table
-            switch(inputArray[0].toLowerCase()) {
+            switch(command.getCommandWord()) {
                 case "bye":
                     System.out.println(goodbye);
                     break;
@@ -80,20 +58,20 @@ public class Luigi {
                 case "mark":
                     System.out.println("\n_____________________________________________");
                     System.out.println("Nice work! I've marked this task as done:");
-                    if (currTask != null) {
-                        currTask.markAsDone();
-                    }
-                    System.out.println(currTask.getDescription());
-                    System.out.println("\n_____________________________________________\n");
+                    command.getCurrTask().markAsDone();
+                    System.out.println(command.getCurrTask().getDescription());
+                    System.out.println(" ");
+                    System.out.println(command.getCurrTask().getRemainingTasks());
+                    System.out.println("_____________________________________________\n");
                     break;
                 case "unmark":
                     System.out.println("\n_____________________________________________");
                     System.out.println("Ok , I've unmarked this task:");
-                    if (currTask != null) {
-                        currTask.unmark();
-                    }
-                    System.out.println(currTask.getDescription());
-                    System.out.println("\n_____________________________________________\n");
+                    command.getCurrTask().unmark();
+                    System.out.println(command.getCurrTask().getDescription());
+                    System.out.println(" ");
+                    System.out.println(command.getCurrTask().getRemainingTasks());
+                    System.out.println("_____________________________________________\n");
                     break;
                 default:
                     Tasks task = new Tasks(input);
