@@ -7,7 +7,7 @@ public class Luigi {
 
         //Initialisation of command words in the form of enum
         enum Keywords {
-            bye, list, mark, unmark
+            bye, list, mark, unmark, todo, deadline, event
         }
 
         //Initialisation of Scanner to read inputs from user
@@ -73,18 +73,34 @@ public class Luigi {
                     System.out.println(command.getCurrTask().getRemainingTasks());
                     System.out.println("_____________________________________________\n");
                     break;
-                default:
-                    Tasks task = new Tasks(input);
-                    printDescription(task);
-                    tasksList.add(task);
+                case "todo":
+                    ToDo todoTask = new ToDo(command.getTaskDescription());
+                    tasksList.add(todoTask);
+                    printDescription(todoTask);
+                    break;
+                case "deadline":
+                    Deadlines deadlineTask = new Deadlines(command.getTaskDescription(), command.getDeadlineString());
+                    tasksList.add(deadlineTask);
+                    printDescription(deadlineTask);
+                    break;
+                case "event":
+                    Events eventsTask = new Events(command.getTaskDescription(),
+                                                        command.getFromString(), command.getToString());
+                    tasksList.add(eventsTask);
+                    printDescription(eventsTask);
+                    break;
+                case "error":
+                    System.out.println("Please enter a valid task description. :(");
+                    break;
             }
         } while (!input.equalsIgnoreCase("bye"));
     }
 
     //Method to print task description
     public static void printDescription(Tasks task) {
-        System.out.println("_____________________________________________\n" + "added: ");
+        System.out.println("_____________________________________________\n" + "Sure thing! I've added this task: ");
         System.out.println(task.getDescription());
+        System.out.println("You currently have " + task.getTotalTasks() + " task(s) in the list.");
         System.out.println("\n_____________________________________________\n");
     }
 

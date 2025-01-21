@@ -73,4 +73,8 @@ public class Tasks {
         }
     }
 
+    public int getTotalTasks() {
+        return totalTasks;
+    }
+
 }
