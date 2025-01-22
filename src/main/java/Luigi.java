@@ -3,11 +3,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Luigi {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InvalidCommandException {
 
         //Initialisation of command words in the form of enum
         enum Keywords {
-            bye, list, mark, unmark, todo, deadline, event
+            bye, list, mark, unmark, todo, deadline, event, delete
         }
 
         //Initialisation of Scanner to read inputs from user
@@ -89,7 +89,15 @@ public class Luigi {
                     tasksList.add(eventsTask);
                     printDescription(eventsTask);
                     break;
+                case "delete":
+                    System.out.println("\n_____________________________________________");
+                    System.out.println("Ok , I've deleted this task:");
+                    System.out.println(command.getCurrTask().getDescription());
+                    System.out.println("_____________________________________________\n");
+                    tasksList.remove(command.getTaskID() - 1);
                 case "error":
+                    break;
+                default:
                     System.out.println("Please enter a valid task description. :(");
                     break;
             }
@@ -114,4 +122,5 @@ public class Luigi {
         str.append("_____________________________________________\n");
         System.out.println(str.toString());
     }
+
 }
