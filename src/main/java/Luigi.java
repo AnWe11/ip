@@ -5,19 +5,13 @@ import java.util.Scanner;
 public class Luigi {
     public static void main(String[] args) throws InvalidCommandException {
 
-        //Initialisation of command words in the form of enum
-        enum Keywords {
-            bye, list, mark, unmark, todo, deadline, event, delete
-        }
-
         //Initialisation of Scanner to read inputs from user
         Scanner scanner = new Scanner(System.in);
 
         //Initialisation of input from user
         String input;
 
-        //Initialisation of List array to store tasks elements
-        List<Tasks> tasksList = new ArrayList<Tasks>();
+        TaskManager taskManager = new TaskManager();
 
         //ASCII Art of Chatbot's name
         String luigiLogo = "_____________________________________________\n" +
@@ -33,10 +27,6 @@ public class Luigi {
         String greeting = "Hello! I am Luigi!\nWhat can I do for you?\n" +
                 "_____________________________________________";
 
-        //Goodbye string of Chatbot
-        String goodbye = "\nGoodbye! Hope to see you again soon!"+
-                "\n_____________________________________________";
-
         System.out.println(luigiLogo);
 
         System.out.println(greeting);
@@ -44,83 +34,8 @@ public class Luigi {
         do {
             //Reads input from user and decides what to do
             input = scanner.nextLine();
-            Commands command = new Commands(input, tasksList);
-
-            //Switch statements to handle the different commands from the enum table
-            switch(command.getCommandWord()) {
-                case "bye":
-                    System.out.println(goodbye);
-                    break;
-                case "list":
-                    System.out.println("Here are the tasks in your list:");
-                    listTasks(tasksList);
-                    break;
-                case "mark":
-                    System.out.println("\n_____________________________________________");
-                    System.out.println("Nice work! I've marked this task as done:");
-                    command.getCurrTask().markAsDone();
-                    System.out.println(command.getCurrTask().getDescription());
-                    System.out.println(" ");
-                    System.out.println(command.getCurrTask().getRemainingTasks());
-                    System.out.println("_____________________________________________\n");
-                    break;
-                case "unmark":
-                    System.out.println("\n_____________________________________________");
-                    System.out.println("Ok , I've unmarked this task:");
-                    command.getCurrTask().unmark();
-                    System.out.println(command.getCurrTask().getDescription());
-                    System.out.println(" ");
-                    System.out.println(command.getCurrTask().getRemainingTasks());
-                    System.out.println("_____________________________________________\n");
-                    break;
-                case "todo":
-                    ToDo todoTask = new ToDo(command.getTaskDescription());
-                    tasksList.add(todoTask);
-                    printDescription(todoTask);
-                    break;
-                case "deadline":
-                    Deadlines deadlineTask = new Deadlines(command.getTaskDescription(), command.getDeadlineString());
-                    tasksList.add(deadlineTask);
-                    printDescription(deadlineTask);
-                    break;
-                case "event":
-                    Events eventsTask = new Events(command.getTaskDescription(),
-                                                        command.getFromString(), command.getToString());
-                    tasksList.add(eventsTask);
-                    printDescription(eventsTask);
-                    break;
-                case "delete":
-                    System.out.println("\n_____________________________________________");
-                    System.out.println("Ok , I've deleted this task:");
-                    System.out.println(command.getCurrTask().getDescription());
-                    System.out.println("_____________________________________________\n");
-                    tasksList.remove(command.getTaskID() - 1);
-                case "error":
-                    break;
-                default:
-                    System.out.println("Please enter a valid task description. :(");
-                    break;
-            }
+            Commands command = new Commands(input, taskManager);
         } while (!input.equalsIgnoreCase("bye"));
-    }
-
-    //Method to print task description
-    public static void printDescription(Tasks task) {
-        System.out.println("_____________________________________________\n" + "Sure thing! I've added this task: ");
-        System.out.println(task.getDescription());
-        System.out.println("You currently have " + task.getTotalTasks() + " task(s) in the list.");
-        System.out.println("\n_____________________________________________\n");
-    }
-
-    //Method to display items in List in sequential order
-    public static void listTasks(List<Tasks> tasksList) {
-        StringBuilder str = new StringBuilder();
-        str.append("\n_____________________________________________\n");
-        for(Tasks entry : tasksList) {
-            str.append(entry.getListDescription());
-        }
-        str.append("_____________________________________________\n");
-        System.out.println(str.toString());
     }
 
 }

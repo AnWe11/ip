@@ -13,7 +13,4 @@ public class ToDo extends Tasks{
         return str.toString();
     }
 
-    public String getListDescription() {
-        return super.getListDescription();
-    }
 }

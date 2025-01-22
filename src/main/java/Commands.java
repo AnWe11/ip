@@ -1,10 +1,12 @@
-import java.util.List;
-
 public class Commands {
 
     enum Keywords {
         bye, list, mark, unmark, todo, deadline, event, delete
     }
+
+    //Goodbye string of Chatbot
+    String goodbye = "\nGoodbye! Hope to see you again soon!"+
+                            "\n_____________________________________________";
 
     //Initialisation of taskID and currTask which will only be initialised if the command is mark or unmark
     private int taskID = -1;
@@ -14,65 +16,87 @@ public class Commands {
     private String deadlineString = null;
     private String fromString = null;
     private String toString = null;
-    private List<Tasks> tasksList;
+    private TaskManager taskManager = null;
 
     //Constructor for Commands
-    public Commands(String input, List<Tasks> tasksList) throws InvalidCommandException {
-        this.tasksList = tasksList;
+    public Commands(String input, TaskManager taskManager) throws InvalidCommandException {
+        this.taskManager = taskManager;
         //Splits input string
         String[] inputArray = input.split(" ");
         this.commandWord = inputArray[0];
 
         switch(commandWord) {
             case "todo":
-                todoFilter(input);
+                createTodoTask(input);
                 break;
             case "deadline":
-                deadlineFilter(input);
+                createDeadlineTask(input);
                 break;
             case "event":
-                eventsFilter(input);
+                createEventsTask(input);
                 break;
             case "list":
+                System.out.println("Here are the tasks in your list:");
+                this.taskManager.listTasks();
+                break;
             case "mark":
             case "unmark":
-            case "bye": break;
+                markUnmarkTask(input);
+                break;
+            case "bye":
+                System.out.println(goodbye);
+                break;
             case "delete":
                 deleteTask(input);
                 break;
             default:
                 System.out.println("Unknown command word: " + commandWord);
-                commandWord = "error";
         }
+    }
 
-
-        /*
-        Check if the first word of the input is mark or unmark, if it is, it means that there already exists a
-        task. Then initialise the currTask to that task
-        */
-        if (inputArray[0].equalsIgnoreCase("mark") || inputArray[0].equalsIgnoreCase("unmark")) {
-            try {
-                this.taskID = Integer.parseInt(inputArray[1]) - 1;
-                if (this.taskID >= 0 && this.taskID < tasksList.size()) {
-                    this.currTask = tasksList.get(this.taskID);
+    public void markUnmarkTask(String input) throws InvalidCommandException {
+        try {
+            int firstSpaceIndex = input.indexOf(" ");
+            //Return everything after first space or empty string if no space
+            if ((firstSpaceIndex == -1) || firstSpaceIndex == input.length() - 1) {
+                if (this.commandWord.equalsIgnoreCase("mark")) {
+                    throw new InvalidCommandException("You did not specify which task you would like to mark... :c");
                 } else {
-                    System.out.println("Invalid task ID.");
+                    throw new InvalidCommandException("You did not specify which task you would like to unmark... :[");
                 }
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid taskID format.");
             }
-            this.currTask = tasksList.get(this.taskID);
+
+            this.taskID = Integer.parseInt(input.substring(firstSpaceIndex + 1));
+            if (this.taskID >= 0 && this.taskID <= taskManager.getTotalTasks()) {
+                this.currTask = taskManager.getTask(this.taskID);
+            } else {
+                throw new NumberFormatException("Invalid Task ID");
+            }
+
+            this.currTask = taskManager.getTask(this.taskID);
+            if (this.commandWord.equalsIgnoreCase("mark")) {
+                System.out.println("Nice work! I've marked this task as done:");
+                this.currTask.markAsDone();
+            } else {
+                System.out.println("Ok , I've unmarked this task:");
+                this.currTask.unmark();
+            }
+            System.out.println(this.currTask.getDescription());
+            System.out.println(" ");
+            this.taskManager.getRemainingTasks();
+            System.out.println("\n_____________________________________________");
+
+            System.out.println("_____________________________________________\n");
+        } catch (InvalidCommandException e) {
+            System.out.println(e.getMessage());
+            System.out.println("_____________________________________________");
+            System.out.println("Input format to mark task should be \nmark <task ID>");
+            System.out.println("_____________________________________________\n");
+            this.taskDescription = "";
+            this.commandWord = "error";
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid taskID format.");
         }
-    }
-
-    //Method to get Command's Task ID if the command is mark / unmark
-    public int getTaskID() {
-        return this.taskID;
-    }
-
-    //Method to get Command's current Task if the command is mark / unmark
-    public Tasks getCurrTask() {
-        return this.currTask;
     }
 
     //Method to retrieve the first word of the command
@@ -80,18 +104,18 @@ public class Commands {
         return this.commandWord;
     }
 
-    public String getTaskDescription() {
-        return this.taskDescription;
-    }
-
-    public void todoFilter(String input) throws InvalidCommandException {
+    public void createTodoTask(String input) throws InvalidCommandException {
         try {
             int firstSpaceIndex = input.indexOf(" ");
             //Return everything after first space or empty string if no space
             if ((firstSpaceIndex == -1) || firstSpaceIndex == input.length() - 1) {
                 throw new InvalidCommandException("Oops! The task description of todo cannot be empty :(");
             }
+
             this.taskDescription = input.substring(firstSpaceIndex + 1);
+            ToDo todoTask = new ToDo(this.taskDescription);
+            taskManager.addTask(todoTask);
+            printDescription(todoTask);
         } catch (InvalidCommandException e) {
             System.out.println(e.getMessage());
             System.out.println("_____________________________________________");
@@ -103,7 +127,7 @@ public class Commands {
 
     }
 
-    public void deadlineFilter(String input) throws InvalidCommandException {
+    public void createDeadlineTask(String input) throws InvalidCommandException {
         try {
             int firstSpaceIndex = input.indexOf(" ");
             //Return everything after first space or empty string if no space
@@ -115,9 +139,13 @@ public class Commands {
             if (!this.taskDescription.contains("/by")) {
                 throw new InvalidCommandException("Oops! You did not specify a deadline date D:");
             }
+
             String[] parts = this.taskDescription.split("/by", 2);
             this.taskDescription = parts[0];
             this.deadlineString = parts[1];
+            Deadlines deadlineTask = new Deadlines(this.taskDescription, this.deadlineString);
+            taskManager.addTask(deadlineTask);
+            printDescription(deadlineTask);
         } catch (InvalidCommandException e) {
             System.out.println(e.getMessage());
             System.out.println("_____________________________________________");
@@ -129,7 +157,7 @@ public class Commands {
 
     }
 
-    public void eventsFilter(String input) throws InvalidCommandException {
+    public void createEventsTask(String input) throws InvalidCommandException {
         try {
             int firstSpaceIndex = input.indexOf(" ");
             //Return everything after first space or empty string if no space
@@ -147,6 +175,9 @@ public class Commands {
             String[] fromToString = parts[1].split("/to", 2);
             fromString = fromToString[0];
             toString = fromToString[1];
+            Events eventsTask = new Events(this.taskDescription, this.fromString, this.toString);
+            taskManager.addTask(eventsTask);
+            printDescription(eventsTask);
         } catch (InvalidCommandException e) {
             System.out.println(e.getMessage());
             System.out.println("_____________________________________________");
@@ -155,18 +186,6 @@ public class Commands {
             this.taskDescription = "";
             this.commandWord = "error";
         }
-    }
-
-    public String getDeadlineString() {
-        return this.deadlineString;
-    }
-
-    public String getFromString() {
-        return this.fromString;
-    }
-
-    public String getToString() {
-        return this.toString;
     }
 
     public void deleteTask(String input) throws InvalidCommandException {
@@ -176,16 +195,30 @@ public class Commands {
             if ((firstSpaceIndex == -1) || firstSpaceIndex == input.length() - 1) {
                 throw new InvalidCommandException("o.O You did not specify which task you would like to delete");
             }
+
             this.taskID = Integer.parseInt(input.substring(firstSpaceIndex + 1));
-            this.currTask = tasksList.get(this.taskID - 1);
+            this.currTask = taskManager.getTask(this.taskID);
+            System.out.println("\n_____________________________________________");
+            System.out.println("Ok , I've deleted this task:");
+            System.out.println(this.currTask.getDescription());
+            System.out.println("_____________________________________________\n");
+            taskManager.removeTask(this.taskID);
         } catch (InvalidCommandException e) {
             System.out.println(e.getMessage());
             System.out.println("_____________________________________________");
-            System.out.println("Input format for events tasks should be\nevent <Task Description> /from <from date> /to <to date>");
+            System.out.println("Input format to delete task should be \ndelete <task ID>");
             System.out.println("_____________________________________________\n");
             this.taskDescription = "";
             this.commandWord = "error";
         }
+    }
+
+    //Method to print task description
+    public void printDescription(Tasks task) {
+        System.out.println("_____________________________________________\n" + "Sure thing! I've added this task: ");
+        System.out.println(task.getDescription());
+        System.out.println("You currently have " + this.taskManager.getTotalTasks() + " task(s) in the list.");
+        System.out.println("\n_____________________________________________\n");
     }
 
 }

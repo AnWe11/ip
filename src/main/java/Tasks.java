@@ -40,12 +40,12 @@ public class Tasks {
         return this.taskID;
     }
 
-    //Method to retrieve the description in the format of a list descriptor
-    public String getListDescription() {
-        StringBuilder str = new StringBuilder();
-        str.append(this.taskID).append(". ").append(this.getDescription()).append("\n");
-        return str.toString();
-    }
+//    //Method to retrieve the description in the format of a list descriptor
+//    public String getListDescription() {
+//        StringBuilder str = new StringBuilder();
+//        str.append(this.taskID).append(". ").append(this.getDescription()).append("\n");
+//        return str.toString();
+//    }
 
     //Method to mark task as done
     public void markAsDone() {
@@ -63,18 +63,8 @@ public class Tasks {
         this.done = false;
     }
 
-    public String getRemainingTasks() {
-        int remainingTasks = totalTasks - totalTasksDone;
-        StringBuilder str = new StringBuilder();
-        if (remainingTasks == 0) {
-            return str.append("Congratulations! You have completed all your tasks! :)").toString();
-        } else {
-            return str.append("You have ").append(remainingTasks).append(" tasks left to complete!").toString();
-        }
-    }
-
-    public int getTotalTasks() {
-        return totalTasks;
+    public boolean isDone() {
+        return this.done;
     }
 
 }

@@ -18,7 +18,4 @@ public class Events extends Tasks {
         return str.toString();
     }
 
-    public String getListDescription() {
-        return super.getListDescription();
-    }
 }
