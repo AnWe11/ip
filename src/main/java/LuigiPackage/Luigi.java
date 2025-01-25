@@ -1,5 +1,9 @@
-import java.util.ArrayList;
-import java.util.List;
+package LuigiPackage;
+
+import CommandsPackage.CommandsParser;
+import Exceptions.InvalidCommandException;
+import TaskPackage.TaskManager;
+
 import java.util.Scanner;
 
 public class Luigi {
@@ -34,7 +38,7 @@ public class Luigi {
         do {
             //Reads input from user and decides what to do
             input = scanner.nextLine();
-            Commands command = new Commands(input, taskManager);
+            CommandsParser command = new CommandsParser(input, taskManager);
         } while (!input.equalsIgnoreCase("bye"));
     }
 

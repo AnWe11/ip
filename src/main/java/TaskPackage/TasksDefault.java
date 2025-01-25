@@ -1,8 +1,9 @@
 /*Tasks class to keep track of the different tasks
-*
-* */
+ *
+ * */
+package TaskPackage;
 
-public class Tasks {
+public class TasksDefault {
 
     //Initialisation of description of task variable, taskID, and boolean done variables
     private String description;
@@ -16,7 +17,7 @@ public class Tasks {
     private static int totalTasksDone = 0;
 
     //Tasks class constructor
-    public Tasks(String description) {
+    public TasksDefault(String description) {
         this.description = description;
         this.taskID = id++;
         this.done = false;
@@ -39,13 +40,6 @@ public class Tasks {
     public int getTaskID() {
         return this.taskID;
     }
-
-//    //Method to retrieve the description in the format of a list descriptor
-//    public String getListDescription() {
-//        StringBuilder str = new StringBuilder();
-//        str.append(this.taskID).append(". ").append(this.getDescription()).append("\n");
-//        return str.toString();
-//    }
 
     //Method to mark task as done
     public void markAsDone() {

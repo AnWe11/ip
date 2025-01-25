@@ -1,8 +1,12 @@
+package TaskPackage;
+
+import Exceptions.InvalidCommandException;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class TaskManager {
-    private List<Tasks> tasksList;
+    private List<TasksDefault> tasksList;
 
     public TaskManager() {
         this.tasksList = new ArrayList<>();
@@ -18,11 +22,11 @@ public class TaskManager {
         System.out.println(str.toString());
     }
 
-    public Tasks getTask(int taskID) throws InvalidCommandException {
+    public TasksDefault getTask(int taskID) throws InvalidCommandException {
         return tasksList.get(taskID - 1);
     }
 
-    public void addTask(Tasks task) {
+    public void addTask(TasksDefault task) {
         tasksList.add(task);
     }
 
@@ -38,7 +42,7 @@ public class TaskManager {
         int remainingTasks = 0;
         StringBuilder str = new StringBuilder();
 
-        for(Tasks entry : this.tasksList) {
+        for(TasksDefault entry : this.tasksList) {
             if (entry.isDone()) {
                 remainingTasks++;
             }
