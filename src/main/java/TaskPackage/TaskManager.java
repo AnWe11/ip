@@ -13,8 +13,9 @@ public class TaskManager {
     }
 
     public void listTasks() {
+        System.out.println("Here are the tasks in your list:");
         StringBuilder str = new StringBuilder();
-        str.append("\n_____________________________________________\n");
+        str.append("_____________________________________________\n");
         for(int i = 0; i < tasksList.size(); i++) {
             str.append(i+1).append(". ").append(tasksList.get(i).getDescription()).append("\n");
         }

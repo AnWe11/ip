@@ -2,7 +2,6 @@ package TaskPackage;
 
 public class Deadlines extends TasksDefault {
 
-    private String taskType = "[D]";
     private String deadlineDate;
 
     public Deadlines(String description, String deadlineDate) {
@@ -13,7 +12,8 @@ public class Deadlines extends TasksDefault {
     @Override
     public String getDescription() {
         StringBuilder str = new StringBuilder();
-        str.append(this.taskType).append(super.getDescription()).append(" (by: ").append(deadlineDate).append(")");
+        String taskType = "[D]";
+        str.append(taskType).append(super.getDescription()).append(" (by: ").append(deadlineDate).append(")");
         return str.toString();
     }
 

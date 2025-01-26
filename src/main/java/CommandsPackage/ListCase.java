@@ -11,7 +11,6 @@ public class ListCase implements DefaultCase {
 
     @Override
     public void action() {
-       System.out.println("Here are the tasks in your list:");
        this.taskManager.listTasks();
     }
 }

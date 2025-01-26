@@ -6,7 +6,7 @@ public class ByeCase implements DefaultCase {
 
     @Override
     public void action() {
-        System.out.println("\nGoodbye! Hope to see you again soon!"+
+        System.out.println("Goodbye! Hope to see you again soon!"+
                 "\n_____________________________________________");
     }
 

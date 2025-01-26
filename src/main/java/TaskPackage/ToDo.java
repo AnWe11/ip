@@ -2,8 +2,6 @@ package TaskPackage;
 
 public class ToDo extends TasksDefault {
 
-    private String taskType = "[T]";
-
     public ToDo(String description) {
         super(description);
     }
@@ -11,7 +9,8 @@ public class ToDo extends TasksDefault {
     @Override
     public String getDescription() {
         StringBuilder str = new StringBuilder();
-        str.append(this.taskType).append(super.getDescription());
+        String taskType = "[T]";
+        str.append(taskType).append(super.getDescription());
         return str.toString();
     }
 

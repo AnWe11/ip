@@ -2,7 +2,6 @@ package TaskPackage;
 
 public class Events extends TasksDefault {
 
-    private String taskType = "[E]";
     private String fromString;
     private String toString;
 
@@ -15,7 +14,8 @@ public class Events extends TasksDefault {
     @Override
     public String getDescription() {
         StringBuilder str = new StringBuilder();
-        str.append(this.taskType).append(super.getDescription()).append(" (from: ").append(fromString)
+        String taskType = "[E]";
+        str.append(taskType).append(super.getDescription()).append(" (from: ").append(fromString)
                                                                 .append(" - ").append(toString).append(")");
         return str.toString();
     }
