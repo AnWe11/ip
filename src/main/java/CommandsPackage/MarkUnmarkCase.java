@@ -3,16 +3,18 @@ import Exceptions.InvalidCommandException;
 import TaskPackage.TaskManager;
 import TaskPackage.TasksDefault;
 
+import java.security.Key;
+
 public class MarkUnmarkCase implements DefaultCase {
     private String input;
-    private String commandWord;
+    private CommandsParser.Keywords keyword;
     private int taskID;
     private TaskManager taskManager;
     private TasksDefault currTask;
 
-    MarkUnmarkCase(String input, String commandWord, TaskManager taskManager) {
+    MarkUnmarkCase(String input, CommandsParser.Keywords keyword, TaskManager taskManager) {
         this.input = input;
-        this.commandWord = commandWord;
+        this.keyword = keyword;
         this.taskManager = taskManager;
     }
 
@@ -22,7 +24,7 @@ public class MarkUnmarkCase implements DefaultCase {
             int firstSpaceIndex = input.indexOf(" ");
             //Return everything after first space or empty string if no space
             if ((firstSpaceIndex == -1) || firstSpaceIndex == input.length() - 1) {
-                if (this.commandWord.equalsIgnoreCase("mark")) {
+                if (this.keyword == CommandsParser.Keywords.MARK) {
                     throw new InvalidCommandException("You did not specify which task you would like to mark... :c");
                 } else {
                     throw new InvalidCommandException("You did not specify which task you would like to unmark... :[");
@@ -37,7 +39,7 @@ public class MarkUnmarkCase implements DefaultCase {
             }
 
             this.currTask = taskManager.getTask(this.taskID);
-            if (this.commandWord.equalsIgnoreCase("mark")) {
+            if (this.keyword == CommandsParser.Keywords.MARK) {
                 System.out.println("Nice work! I've marked this task as done:");
                 this.currTask.markAsDone();
             } else {
@@ -55,7 +57,6 @@ public class MarkUnmarkCase implements DefaultCase {
             System.out.println("_____________________________________________");
             System.out.println("Input format to mark task should be \nmark <task ID>");
             System.out.println("_____________________________________________\n");
-            this.commandWord = "error";
         } catch (NumberFormatException e) {
             System.out.println("Invalid taskID format.");
         }
