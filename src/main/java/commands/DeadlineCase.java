@@ -1,16 +1,21 @@
 package commands;
 
 import exceptions.InvalidCommandException;
+import storage.Data;
 import tasks.Deadlines;
 import tasks.TaskManager;
+
+import java.io.IOException;
 
 public class DeadlineCase implements DefaultCase {
     private TaskManager taskManager;
     private String input;
+    private Data data;
 
-    public DeadlineCase(String input, TaskManager taskManager) {
+    public DeadlineCase(String input, TaskManager taskManager, Data data) {
         this.taskManager = taskManager;
         this.input = input;
+        this.data = data;
     }
 
     @Override
@@ -34,6 +39,7 @@ public class DeadlineCase implements DefaultCase {
             String deadlineString = parts[1];
             Deadlines deadlineTask = new Deadlines(taskDescription, deadlineString);
             taskManager.addTask(deadlineTask);
+            data.saveData(deadlineTask);
             System.out.println("_____________________________________________\n" + "Sure thing! I've added this task: ");
             System.out.println(deadlineTask.getDescription());
             System.out.println("You currently have " + this.taskManager.getTotalTasks() + " task(s) in the list.");
@@ -44,6 +50,8 @@ public class DeadlineCase implements DefaultCase {
             System.out.println("Input format for deadline tasks should be\ndeadline <Task Description> /by <deadline date>");
             System.out.println("_____________________________________________");
             taskDescription = "";
+        } catch (IOException e) {
+            System.out.println("Unable to save deadline Task: " + e.getMessage());
         }
     }
 }

@@ -2,6 +2,7 @@ package luigi;
 
 import commands.CommandsParser;
 import exceptions.InvalidCommandException;
+import storage.Data;
 import tasks.TaskManager;
 
 import java.util.Scanner;
@@ -34,10 +35,12 @@ public class Luigi {
         System.out.println(luigiLogo);
         System.out.println(greeting);
 
+        Data data = new Data();
+
         do {
             //Reads input from user and decides what to do
             input = scanner.nextLine();
-            CommandsParser command = new CommandsParser(input, taskManager);
+            CommandsParser command = new CommandsParser(input, taskManager, data);
         } while (!input.equalsIgnoreCase("bye"));
     }
 

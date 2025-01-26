@@ -44,10 +44,10 @@ public class MarkUnmarkCase implements DefaultCase {
                 System.out.println("Ok , I've unmarked this task:");
                 currTask.unmark();
             }
+            System.out.println("_____________________________________________");
             System.out.println(currTask.getDescription());
             System.out.println(" ");
             this.taskManager.getRemainingTasks();
-            System.out.println("_____________________________________________");
             System.out.println("_____________________________________________");
         } catch (InvalidCommandException e) {
             System.out.println(e.getMessage());

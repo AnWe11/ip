@@ -9,6 +9,7 @@ public class TasksDefault {
     private String description;
     private int taskID;
     private boolean done;
+    private String taskType;
 
     //Initialisation of static int id
     private static int id = 1;
@@ -17,10 +18,11 @@ public class TasksDefault {
     private static int totalTasksDone = 0;
 
     //Tasks class constructor
-    public TasksDefault(String description) {
+    public TasksDefault(String description, String taskType) {
         this.description = description;
         this.taskID = id++;
         this.done = false;
+        this.taskType = taskType;
         totalTasks++;
     }
 
@@ -59,6 +61,18 @@ public class TasksDefault {
 
     public boolean isDone() {
         return this.done;
+    }
+
+    public String getTaskType() {
+        return this.taskType;
+    }
+
+    public String getTaskDescription() {
+        return this.description;
+    }
+
+    public String getDeadlineDate() {
+        return "";
     }
 
 }

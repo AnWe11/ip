@@ -3,15 +3,18 @@ package tasks;
 public class ToDo extends TasksDefault {
 
     public ToDo(String description) {
-        super(description);
+        super(description, "[T]");
     }
 
     @Override
     public String getDescription() {
         StringBuilder str = new StringBuilder();
-        String taskType = "[T]";
-        str.append(taskType).append(super.getDescription());
+        str.append("[T]").append(super.getDescription());
         return str.toString();
     }
 
+    @Override
+    public String getDeadlineDate() {
+        return super.getDeadlineDate();
+    }
 }

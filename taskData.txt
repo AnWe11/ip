@@ -1,0 +1,4 @@
+[T] | 0 | return books 
+[D] | 0 | bread  |  Sunday
+[E] | 0 | games  |  5th Feb 2pm - 5pm
+[T] | 0 | buy phone

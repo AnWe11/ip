@@ -19,7 +19,7 @@ public class TaskManager {
         for(int i = 0; i < tasksList.size(); i++) {
             str.append(i+1).append(". ").append(tasksList.get(i).getDescription()).append("\n");
         }
-        str.append("_____________________________________________\n");
+        str.append("_____________________________________________");
         System.out.println(str.toString());
     }
 
