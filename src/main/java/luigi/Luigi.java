@@ -1,8 +1,8 @@
-package LuigiPackage;
+package luigi;
 
-import CommandsPackage.CommandsParser;
-import Exceptions.InvalidCommandException;
-import TaskPackage.TaskManager;
+import commands.CommandsParser;
+import exceptions.InvalidCommandException;
+import tasks.TaskManager;
 
 import java.util.Scanner;
 
@@ -32,7 +32,6 @@ public class Luigi {
                 "_____________________________________________";
 
         System.out.println(luigiLogo);
-
         System.out.println(greeting);
 
         do {

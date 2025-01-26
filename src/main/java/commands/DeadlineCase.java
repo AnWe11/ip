@@ -1,8 +1,8 @@
-package CommandsPackage;
+package commands;
 
-import Exceptions.InvalidCommandException;
-import TaskPackage.Deadlines;
-import TaskPackage.TaskManager;
+import exceptions.InvalidCommandException;
+import tasks.Deadlines;
+import tasks.TaskManager;
 
 public class DeadlineCase implements DefaultCase {
     private TaskManager taskManager;

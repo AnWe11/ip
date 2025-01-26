@@ -1,8 +1,8 @@
-package CommandsPackage;
+package commands;
 
-import Exceptions.InvalidCommandException;
-import TaskPackage.TaskManager;
-import TaskPackage.TasksDefault;
+import exceptions.InvalidCommandException;
+import tasks.TaskManager;
+import tasks.TasksDefault;
 
 public class DeleteCase implements DefaultCase {
     private String taskDescription;

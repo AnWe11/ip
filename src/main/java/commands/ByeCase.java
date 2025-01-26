@@ -1,4 +1,4 @@
-package CommandsPackage;
+package commands;
 
 public class ByeCase implements DefaultCase {
 

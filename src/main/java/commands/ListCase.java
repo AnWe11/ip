@@ -1,5 +1,5 @@
-package CommandsPackage;
-import TaskPackage.TaskManager;
+package commands;
+import tasks.TaskManager;
 
 public class ListCase implements DefaultCase {
 

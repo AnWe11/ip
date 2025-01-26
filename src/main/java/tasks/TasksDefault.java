@@ -1,7 +1,7 @@
 /*Tasks class to keep track of the different tasks
  *
  * */
-package TaskPackage;
+package tasks;
 
 public class TasksDefault {
 

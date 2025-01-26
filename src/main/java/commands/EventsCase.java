@@ -1,8 +1,8 @@
-package CommandsPackage;
+package commands;
 
-import Exceptions.InvalidCommandException;
-import TaskPackage.Events;
-import TaskPackage.TaskManager;
+import exceptions.InvalidCommandException;
+import tasks.Events;
+import tasks.TaskManager;
 
 public class EventsCase implements DefaultCase {
     private TaskManager taskManager;

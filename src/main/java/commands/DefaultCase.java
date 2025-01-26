@@ -1,6 +1,6 @@
-package CommandsPackage;
+package commands;
 
-import Exceptions.InvalidCommandException;
+import exceptions.InvalidCommandException;
 
 public interface DefaultCase {
     public abstract void action() throws InvalidCommandException;

@@ -1,8 +1,8 @@
-package CommandsPackage;
+package commands;
 
-import Exceptions.InvalidCommandException;
-import TaskPackage.TaskManager;
-import TaskPackage.ToDo;
+import exceptions.InvalidCommandException;
+import tasks.TaskManager;
+import tasks.ToDo;
 
 public class ToDoCase implements DefaultCase {
     private TaskManager taskManager;

@@ -1,10 +1,8 @@
-package CommandsPackage;
-import Exceptions.InvalidCommandException;
-import Exceptions.InvalidIDException;
-import TaskPackage.TaskManager;
-import TaskPackage.TasksDefault;
-
-import java.security.Key;
+package commands;
+import exceptions.InvalidCommandException;
+import exceptions.InvalidIDException;
+import tasks.TaskManager;
+import tasks.TasksDefault;
 
 public class MarkUnmarkCase implements DefaultCase {
     private String input;

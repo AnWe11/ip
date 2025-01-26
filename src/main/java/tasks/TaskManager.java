@@ -1,6 +1,6 @@
-package TaskPackage;
+package tasks;
 
-import Exceptions.InvalidCommandException;
+import exceptions.InvalidCommandException;
 
 import java.util.ArrayList;
 import java.util.List;

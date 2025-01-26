@@ -1,7 +1,7 @@
-package CommandsPackage;
+package commands;
 
-import Exceptions.InvalidCommandException;
-import TaskPackage.*;
+import exceptions.InvalidCommandException;
+import tasks.*;
 
 public class CommandsParser {
 
