@@ -2,4 +2,3 @@
 [T] | 0 | buy bread
 [T] | 1 | go out
 [D] | 0 | study  |  Monday
-[E] | 0 | CNY visiting  |  27th Jan 5pm - 9pm

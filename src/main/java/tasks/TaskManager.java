@@ -44,7 +44,7 @@ public class TaskManager {
     }
 
     public void removeTask(int taskID) throws InvalidCommandException {
-        System.out.println("\n_____________________________________________");
+        System.out.println("_____________________________________________");
         System.out.println("Ok , I've deleted this task:");
         System.out.println(getTask(taskID).getDescription());
         System.out.println("_____________________________________________");
