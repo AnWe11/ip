@@ -40,11 +40,7 @@ public class EventsCase implements DefaultCase {
             String toString = fromToString[1];
             Events eventsTask = new Events(taskDescription, fromString, toString);
             taskManager.addTask(eventsTask);
-            data.saveData(eventsTask);
-            System.out.println("_____________________________________________\n" + "Sure thing! I've added this task: ");
-            System.out.println(eventsTask.getDescription());
-            System.out.println("You currently have " + this.taskManager.getTotalTasks() + " task(s) in the list.");
-            System.out.println("_____________________________________________");
+            data.saveData(taskManager);
         } catch (InvalidCommandException e) {
             System.out.println(e.getMessage());
             System.out.println("_____________________________________________");

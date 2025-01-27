@@ -13,9 +13,9 @@ public class TaskManager {
     }
 
     public void listTasks() {
-        System.out.println("Here are the tasks in your list:");
         StringBuilder str = new StringBuilder();
         str.append("_____________________________________________\n");
+        System.out.println("Here are the tasks in your list:");
         for(int i = 0; i < tasksList.size(); i++) {
             str.append(i+1).append(". ").append(tasksList.get(i).getDescription()).append("\n");
         }
@@ -29,14 +29,30 @@ public class TaskManager {
 
     public void addTask(TasksDefault task) {
         tasksList.add(task);
+        System.out.println("_____________________________________________\n" + "Sure thing! I've added this task: ");
+        System.out.println(task.getDescription());
+        System.out.println("You currently have " + tasksList.size() + " task(s) in the list.");
+        System.out.println("_____________________________________________");
+    }
+
+    public void loadTask(TasksDefault task) {
+        tasksList.add(task);
     }
 
     public int getTotalTasks() {
         return tasksList.size();
     }
 
-    public void removeTask(int taskID) {
+    public void removeTask(int taskID) throws InvalidCommandException {
+        System.out.println("\n_____________________________________________");
+        System.out.println("Ok , I've deleted this task:");
+        System.out.println(getTask(taskID).getDescription());
+        System.out.println("_____________________________________________");
         tasksList.remove(taskID - 1);
+    }
+
+    public List<TasksDefault> getTasksList() {
+        return tasksList;
     }
 
     public void getRemainingTasks() {

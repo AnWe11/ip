@@ -38,11 +38,6 @@ public class TasksDefault {
         return str.toString();
     }
 
-    //Method to get Task ID
-    public int getTaskID() {
-        return this.taskID;
-    }
-
     //Method to mark task as done
     public void markAsDone() {
         if (!done) {

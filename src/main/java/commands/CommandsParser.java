@@ -49,7 +49,7 @@ public class CommandsParser {
                     break;
                 case MARK:
                 case UNMARK:
-                    MarkUnmarkCase markUnmarkCase = new MarkUnmarkCase(input, keyword, taskManager);
+                    MarkUnmarkCase markUnmarkCase = new MarkUnmarkCase(input, keyword, taskManager, data);
                     markUnmarkCase.action();
                     break;
                 case BYE:
@@ -57,7 +57,7 @@ public class CommandsParser {
                     byeCase.action();
                     break;
                 case DELETE:
-                    DeleteCase deleteCase = new DeleteCase(input, taskManager);
+                    DeleteCase deleteCase = new DeleteCase(input, taskManager, data);
                     deleteCase.action();
                     break;
                 case INVALID:

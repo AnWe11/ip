@@ -1,4 +1,5 @@
-[T] | 0 | return books 
-[D] | 0 | bread  |  Sunday
-[E] | 0 | games  |  5th Feb 2pm - 5pm
-[T] | 0 | buy phone
+[T] | 1 | return books
+[T] | 0 | buy bread
+[T] | 1 | go out
+[D] | 0 | study  |  Monday
+[E] | 0 | CNY visiting  |  27th Jan 5pm - 9pm
