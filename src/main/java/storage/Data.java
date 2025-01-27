@@ -1,4 +1,6 @@
 package storage;
+import datetimeutility.DateTimeConversion;
+import exceptions.InvalidDateException;
 import tasks.*;
 
 import java.io.File;
@@ -16,7 +18,7 @@ public class Data {
 
         try {
             if (file.createNewFile()) {
-                System.out.println("\nFirst time using Luigi, data storage created");
+                System.out.println("\nFirst time using Luigi, data storage created\n");
             } else {
                 System.out.println("\nWelcome back! Your previous data has already been loaded\n" +
                                         "Type 'list' to view your saved tasks\n");
@@ -65,7 +67,7 @@ public class Data {
                     }
                     taskManager.loadTask(todoTask);
                 } else if (taskType.equals("[D]")) {
-                    String deadlineDate =  taskLineArray[3];
+                    String deadlineDate = DateTimeConversion.loadDateTime(taskLineArray[3]);
                     Deadlines deadlineTask = new Deadlines(taskDescription, deadlineDate);
                     if (taskDone) {
                         deadlineTask.markAsDone();
@@ -73,9 +75,9 @@ public class Data {
                     taskManager.loadTask(deadlineTask);
                 } else if (taskType.equals("[E]")) {
                     String deadlineDate =  taskLineArray[3];
-                    String[] fromToArray = deadlineDate.split("-");
-                    String from = fromToArray[0];
-                    String to = fromToArray[1];
+                    String[] fromToArray = deadlineDate.split(" - ");
+                    String from = DateTimeConversion.loadDateTime(fromToArray[0]);
+                    String to = DateTimeConversion.loadDateTime(fromToArray[1]);
                     Events eventsTask = new Events(taskDescription, from, to);
                     if (taskDone) {
                         eventsTask.markAsDone();
@@ -87,6 +89,8 @@ public class Data {
             }
         } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
+        } catch (InvalidDateException e) {
+            System.out.println("Invalid date / date format " + e.getMessage());
         }
     }
 

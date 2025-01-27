@@ -1,5 +1,7 @@
 package tasks;
 
+import datetimeutility.DateTimeConversion;
+
 public class Events extends TasksDefault {
 
     private String fromString;
@@ -7,8 +9,16 @@ public class Events extends TasksDefault {
 
     public Events(String description, String fromString, String toString) {
         super(description, "[E]");
-        this.fromString = fromString;
-        this.toString = toString;
+        String[] fromStringArray = fromString.trim().split(" ");
+        this.fromString = DateTimeConversion.getConvertedDate(fromStringArray[0]);
+        if (fromStringArray.length > 1) {
+            this.fromString += " " + DateTimeConversion.getConvertedTime(fromStringArray[1]);
+        }
+        String[] toStringArray = toString.trim().split(" ");
+        this.toString = DateTimeConversion.getConvertedDate(toStringArray[0]);
+        if (toStringArray.length > 1) {
+            this.toString += " " + DateTimeConversion.getConvertedTime(toStringArray[1]);
+        }
     }
 
     @Override
@@ -21,6 +31,6 @@ public class Events extends TasksDefault {
 
     @Override
     public String getDeadlineDate() {
-        return this.fromString + "-" + this.toString;
+        return this.fromString + " - " + this.toString;
     }
 }
