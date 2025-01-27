@@ -1,6 +1,7 @@
 package commands;
 
 import exceptions.InvalidCommandException;
+import storage.Data;
 import tasks.*;
 
 public class CommandsParser {
@@ -20,7 +21,7 @@ public class CommandsParser {
     private String commandWord = null;
 
     //Constructor for Commands
-    public CommandsParser(String input, TaskManager taskManager) throws InvalidCommandException {
+    public CommandsParser(String input, TaskManager taskManager, Data data) throws InvalidCommandException {
 
         try {
             //Splits input string
@@ -31,15 +32,15 @@ public class CommandsParser {
 
             switch (keyword) {
                 case TODO:
-                    ToDoCase todoCase = new ToDoCase(input, taskManager);
+                    ToDoCase todoCase = new ToDoCase(input, taskManager, data);
                     todoCase.action();
                     break;
                 case DEADLINE:
-                    DeadlineCase deadlineCase = new DeadlineCase(input, taskManager);
+                    DeadlineCase deadlineCase = new DeadlineCase(input, taskManager, data);
                     deadlineCase.action();
                     break;
                 case EVENT:
-                    EventsCase eventCase = new EventsCase(input, taskManager);
+                    EventsCase eventCase = new EventsCase(input, taskManager, data);
                     eventCase.action();
                     break;
                 case LIST:
@@ -48,7 +49,7 @@ public class CommandsParser {
                     break;
                 case MARK:
                 case UNMARK:
-                    MarkUnmarkCase markUnmarkCase = new MarkUnmarkCase(input, keyword, taskManager);
+                    MarkUnmarkCase markUnmarkCase = new MarkUnmarkCase(input, keyword, taskManager, data);
                     markUnmarkCase.action();
                     break;
                 case BYE:
@@ -56,7 +57,7 @@ public class CommandsParser {
                     byeCase.action();
                     break;
                 case DELETE:
-                    DeleteCase deleteCase = new DeleteCase(input, taskManager);
+                    DeleteCase deleteCase = new DeleteCase(input, taskManager, data);
                     deleteCase.action();
                     break;
                 case INVALID:

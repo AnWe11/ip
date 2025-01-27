@@ -1,16 +1,21 @@
 package commands;
 
 import exceptions.InvalidCommandException;
+import storage.Data;
 import tasks.TaskManager;
 import tasks.ToDo;
+
+import java.io.IOException;
 
 public class ToDoCase implements DefaultCase {
     private TaskManager taskManager;
     private String input;
+    private Data data;
 
-    public ToDoCase(String input, TaskManager taskManager) {
+    public ToDoCase(String input, TaskManager taskManager, Data data) {
         this.taskManager = taskManager;
         this.input = input;
+        this.data = data;
     }
 
     @Override
@@ -26,16 +31,15 @@ public class ToDoCase implements DefaultCase {
             taskDescription = input.substring(firstSpaceIndex + 1);
             ToDo todoTask = new ToDo(taskDescription);
             taskManager.addTask(todoTask);
-            System.out.println("_____________________________________________\n" + "Sure thing! I've added this task: ");
-            System.out.println(todoTask.getDescription());
-            System.out.println("You currently have " + this.taskManager.getTotalTasks() + " task(s) in the list.");
-            System.out.println("_____________________________________________");
+            data.saveData(taskManager);
         } catch (InvalidCommandException e) {
             System.out.println(e.getMessage());
             System.out.println("_____________________________________________");
             System.out.println("Input format for todo tasks should be\ntodo <Task Description>");
             System.out.println("_____________________________________________");
             taskDescription = "";
+        } catch (IOException e) {
+            System.out.println("Unable to save todo task: " + e.getMessage());
         }
     }
 }

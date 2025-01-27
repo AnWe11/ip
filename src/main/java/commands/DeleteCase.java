@@ -1,19 +1,22 @@
 package commands;
 
 import exceptions.InvalidCommandException;
+import storage.Data;
 import tasks.TaskManager;
 import tasks.TasksDefault;
 
+import java.io.IOException;
+
 public class DeleteCase implements DefaultCase {
-    private String taskDescription;
     private TaskManager taskManager;
     private String input;
     private int taskID;
-    private TasksDefault currTask;
+    private Data data;
 
-    public DeleteCase(String input, TaskManager taskManager) {
+    public DeleteCase(String input, TaskManager taskManager, Data data) {
         this.taskManager = taskManager;
         this.input = input;
+        this.data = data;
     }
 
     @Override
@@ -24,20 +27,16 @@ public class DeleteCase implements DefaultCase {
             if ((firstSpaceIndex == -1) || firstSpaceIndex == input.length() - 1) {
                 throw new InvalidCommandException("o.O You did not specify which task you would like to delete");
             }
-
             this.taskID = Integer.parseInt(input.substring(firstSpaceIndex + 1));
-            this.currTask = taskManager.getTask(this.taskID);
-            System.out.println("\n_____________________________________________");
-            System.out.println("Ok , I've deleted this task:");
-            System.out.println(this.currTask.getDescription());
-            System.out.println("_____________________________________________\n");
             taskManager.removeTask(this.taskID);
+            data.saveData(taskManager);
         } catch (InvalidCommandException e) {
             System.out.println(e.getMessage());
             System.out.println("_____________________________________________");
             System.out.println("Input format to delete task should be \ndelete <task ID>");
             System.out.println("_____________________________________________\n");
-            this.taskDescription = "";
+        } catch (IOException e) {
+            System.out.println("Something went wrong when trying to save the deleted task: " + e.getMessage());
         }
     }
 }

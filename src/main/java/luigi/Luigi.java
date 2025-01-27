@@ -2,43 +2,55 @@ package luigi;
 
 import commands.CommandsParser;
 import exceptions.InvalidCommandException;
+import storage.Data;
 import tasks.TaskManager;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Luigi {
-    public static void main(String[] args) throws InvalidCommandException {
+    public static void main(String[] args) throws InvalidCommandException, IOException {
 
-        //Initialisation of Scanner to read inputs from user
-        Scanner scanner = new Scanner(System.in);
+        try {
+            //Initialisation of Scanner to read inputs from user
+            Scanner scanner = new Scanner(System.in);
 
-        //Initialisation of input from user
-        String input;
+            //Initialisation of input from user
+            String input;
 
-        TaskManager taskManager = new TaskManager();
+            TaskManager taskManager = new TaskManager();
 
-        //ASCII Art of Chatbot's name
-        String luigiLogo = "_____________________________________________\n" +
-                " _        _    _    _____    _____    _____  \n" +
-                "| |      | |  | |  |_   _|  / ____|  |_   _| \n" +
-                "| |      | |  | |    | |   | |   _     | |   \n" +
-                "| |      | |  | |    | |   | |  |_|    | |   \n" +
-                "| |____  | |__| |   _| |_  | |__| |   _| |_  \n" +
-                "|______|  \\____/   |_____|  \\_____|  |_____| \n" +
-                "_____________________________________________";
+            //ASCII Art of Chatbot's name
+            String luigiLogo = "_____________________________________________\n" +
+                    " _        _    _    _____    _____    _____  \n" +
+                    "| |      | |  | |  |_   _|  / ____|  |_   _| \n" +
+                    "| |      | |  | |    | |   | |   _     | |   \n" +
+                    "| |      | |  | |    | |   | |  |_|    | |   \n" +
+                    "| |____  | |__| |   _| |_  | |__| |   _| |_  \n" +
+                    "|______|  \\____/   |_____|  \\_____|  |_____| \n" +
+                    "_____________________________________________";
 
-        //Greeting string of Chatbot
-        String greeting = "Hello! I am Luigi!\nWhat can I do for you?\n" +
-                "_____________________________________________";
+            //Greeting string of Chatbot
+            String greeting = "Hello! I am Luigi!\nWhat can I do for you?\n" +
+                    "_____________________________________________";
 
-        System.out.println(luigiLogo);
-        System.out.println(greeting);
+            System.out.println(luigiLogo);
+            System.out.println(greeting);
 
-        do {
-            //Reads input from user and decides what to do
-            input = scanner.nextLine();
-            CommandsParser command = new CommandsParser(input, taskManager);
-        } while (!input.equalsIgnoreCase("bye"));
+            Data data = new Data();
+            data.loadData(taskManager);
+
+            do {
+                //Reads input from user and decides what to do
+                input = scanner.nextLine();
+                CommandsParser command = new CommandsParser(input, taskManager, data);
+            } while (!input.equalsIgnoreCase("bye"));
+        } catch (InvalidCommandException e) {
+            System.out.println("Invalid Command Exception in main" + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("IO Exception in main" + e.getMessage());
+        }
+
     }
 
 }

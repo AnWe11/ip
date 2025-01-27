@@ -1,16 +1,21 @@
 package commands;
 
 import exceptions.InvalidCommandException;
+import storage.Data;
 import tasks.Events;
 import tasks.TaskManager;
+
+import java.io.IOException;
 
 public class EventsCase implements DefaultCase {
     private TaskManager taskManager;
     private String input;
+    private Data data;
 
-    public EventsCase(String input, TaskManager taskManager) {
+    public EventsCase(String input, TaskManager taskManager, Data data) {
         this.taskManager = taskManager;
         this.input = input;
+        this.data = data;
     }
 
     @Override
@@ -35,16 +40,15 @@ public class EventsCase implements DefaultCase {
             String toString = fromToString[1];
             Events eventsTask = new Events(taskDescription, fromString, toString);
             taskManager.addTask(eventsTask);
-            System.out.println("_____________________________________________\n" + "Sure thing! I've added this task: ");
-            System.out.println(eventsTask.getDescription());
-            System.out.println("You currently have " + this.taskManager.getTotalTasks() + " task(s) in the list.");
-            System.out.println("_____________________________________________");
+            data.saveData(taskManager);
         } catch (InvalidCommandException e) {
             System.out.println(e.getMessage());
             System.out.println("_____________________________________________");
             System.out.println("Input format for events tasks should be\nevent <Task Description> /from <from date> /to <to date>");
             System.out.println("_____________________________________________");
             taskDescription = "";
+        } catch (IOException e) {
+            System.out.println("Unable to save Events Task: " + e.getMessage());
         }
     }
 

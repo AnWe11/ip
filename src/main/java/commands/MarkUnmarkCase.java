@@ -1,18 +1,23 @@
 package commands;
 import exceptions.InvalidCommandException;
 import exceptions.InvalidIDException;
+import storage.Data;
 import tasks.TaskManager;
 import tasks.TasksDefault;
+
+import java.io.IOException;
 
 public class MarkUnmarkCase implements DefaultCase {
     private String input;
     private CommandsParser.Keywords keyword;
     private TaskManager taskManager;
+    private Data data;
 
-    MarkUnmarkCase(String input, CommandsParser.Keywords keyword, TaskManager taskManager) {
+    MarkUnmarkCase(String input, CommandsParser.Keywords keyword, TaskManager taskManager, Data data) {
         this.input = input;
         this.keyword = keyword;
         this.taskManager = taskManager;
+        this.data = data;
     }
 
     @Override
@@ -35,7 +40,7 @@ public class MarkUnmarkCase implements DefaultCase {
             } else {
                 throw new InvalidIDException("Invalid Task ID");
             }
-
+            System.out.println("_____________________________________________");
             currTask = taskManager.getTask(taskID);
             if (this.keyword == CommandsParser.Keywords.MARK) {
                 System.out.println("Nice work! I've marked this task as done:");
@@ -44,21 +49,23 @@ public class MarkUnmarkCase implements DefaultCase {
                 System.out.println("Ok , I've unmarked this task:");
                 currTask.unmark();
             }
+            data.saveData(this.taskManager);
             System.out.println(currTask.getDescription());
             System.out.println(" ");
             this.taskManager.getRemainingTasks();
             System.out.println("_____________________________________________");
-            System.out.println("_____________________________________________");
         } catch (InvalidCommandException e) {
-            System.out.println(e.getMessage());
             System.out.println("_____________________________________________");
+            System.out.println(e.getMessage());
             System.out.println("Input format to mark task should be \nmark <task ID>");
             System.out.println("_____________________________________________");
         } catch (InvalidIDException e) {
-            System.out.println(e.getMessage());
             System.out.println("_____________________________________________");
+            System.out.println(e.getMessage());
             System.out.println("ID provided is invalid.");
             System.out.println("_____________________________________________");
+        } catch (IOException e) {
+            System.out.println("Something went wrong when trying to save the marked/unmarked tasks: " + e.getMessage());
         }
     }
 }
