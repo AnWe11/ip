@@ -1,6 +1,7 @@
 package commands;
 
 import exceptions.InvalidCommandException;
+import exceptions.InvalidDateException;
 import storage.Data;
 import tasks.Deadlines;
 import tasks.TaskManager;
@@ -48,6 +49,8 @@ public class DeadlineCase implements DefaultCase {
             taskDescription = "";
         } catch (IOException e) {
             System.out.println("Unable to save deadline Task: " + e.getMessage());
+        } catch (InvalidDateException e) {
+            System.out.println("Invalid date / date format " + e.getMessage());
         }
     }
 }
