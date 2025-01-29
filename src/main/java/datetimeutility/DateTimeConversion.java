@@ -7,6 +7,11 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Date Time Conversion class to convert dates and time.
+ * Converts dates from 2025-01-29 to Jan 29 2025 and vice versa.
+ * Converts time from 24-hour formats to 12 hour formats with AM/PM.
+ */
 public class DateTimeConversion {
     private static final DateTimeFormatter TIME_INPUT_FORMAT = DateTimeFormatter.ofPattern("HHmm");
     private static final DateTimeFormatter TIME_OUTPUT_FORMAT = DateTimeFormatter.ofPattern("h:mm a");
@@ -15,7 +20,12 @@ public class DateTimeConversion {
     private static final DateTimeFormatter LOAD_DATA_INPUT_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy h:mm a");
     private static final DateTimeFormatter LOAD_DATA_OUTPUT_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
-
+    /**
+     * Converts 24 hour time with format 1800 to 12-hour format with AM/PM, 6:00 PM.
+     * @param time24Hour 24-hour String format time
+     * @return 12-hour format time with AM/PM String
+     * @throws InvalidDateException If given input time is in the invalid format.
+     */
     public static String getConvertedTime(String time24Hour) throws InvalidDateException {
         try {
             LocalTime time = LocalTime.parse(time24Hour.trim(), TIME_INPUT_FORMAT);
@@ -26,6 +36,12 @@ public class DateTimeConversion {
 
     }
 
+    /**
+     * Converts date with format 2025-01-29 to date with format Jan 29 2025.
+     * @param inputDate date String with format 2025-01-29.
+     * @return date String with format Jan 29 2025.
+     * @throws InvalidDateException If given input date is in invalid format.
+     */
     public static String getConvertedDate(String inputDate) throws InvalidDateException {
         try {
             LocalDate date = LocalDate.parse(inputDate.trim(), DATE_INPUT_FORMAT);
@@ -36,6 +52,13 @@ public class DateTimeConversion {
 
     }
 
+    /**
+     * Converts date and time with format Jan 29 2025 6:00 PM to date and time with format 2025-01-29 1800.
+     * Can also convert date if no time is given.
+     * @param inputDate dateTime input String with format Jan 29 2025 6:00 PM or Jan 29 2025.
+     * @return dateTime String with format 2025-01-29 1800 or 2025-01-29.
+     * @throws InvalidDateException
+     */
     public static String loadDateTime(String inputDate) throws InvalidDateException {
         inputDate = inputDate.trim();
         try {

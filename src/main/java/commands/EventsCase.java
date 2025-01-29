@@ -7,17 +7,32 @@ import tasks.TaskManager;
 
 import java.io.IOException;
 
+/**
+ * Method call if command word is 'deadline', creates a deadline task instance.
+ */
 public class EventsCase implements DefaultCase {
     private TaskManager taskManager;
     private String input;
     private Data data;
 
+    /**
+     * EventsCase instance.
+     * @param input input String containing the task description and the start date and end date of the event.
+     * @param taskManager TaskManager class instance.
+     * @param data Storage class instance.
+     */
     public EventsCase(String input, TaskManager taskManager, Data data) {
         this.taskManager = taskManager;
         this.input = input;
         this.data = data;
     }
 
+    /**
+     * Splits the input String to separate the task description and from and to date.
+     * Checks if the input string and from and to dates are valid.
+     * Creates an event task and update it in the TaskManager class and in the Storage class.
+     * @throws InvalidCommandException If user did not include a task description or the from and to dates.
+     */
     @Override
     public void action() throws InvalidCommandException {
         String taskDescription;
