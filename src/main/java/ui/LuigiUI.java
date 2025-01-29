@@ -22,7 +22,7 @@ public class LuigiUI {
     public LuigiUI() {
     }
 
-    public String printUI() {
-        return luigiLogo + "\n" + greeting;
+    public void printUI() {
+        System.out.println(luigiLogo + "\n" + greeting + "\n");
     }
 }

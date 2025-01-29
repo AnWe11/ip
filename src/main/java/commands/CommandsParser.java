@@ -13,7 +13,7 @@ public class CommandsParser {
      * List of command keywords the user can input that will trigger a method call.
      */
     enum Keywords {
-        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, INVALID;
+        BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, FIND, INVALID;
 
         public static Keywords converter(String command) throws InvalidCommandException {
             try {
@@ -71,6 +71,10 @@ public class CommandsParser {
                 case DELETE:
                     DeleteCase deleteCase = new DeleteCase(input, taskManager, data);
                     deleteCase.action();
+                    break;
+                case FIND:
+                    FindCase findCase = new FindCase(input, taskManager);
+                    findCase.action();
                     break;
                 case INVALID:
                     InvalidCase invalidCase = new InvalidCase(input);
