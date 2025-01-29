@@ -1,8 +1,11 @@
 package ui;
 
-public class LuigiUI {
+import org.junit.jupiter.api.Test;
 
-    //ASCII Art of Chatbot's name
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class LuigiUITest {
+
     String luigiLogo = "_____________________________________________\n" +
             " _        _    _    _____    _____    _____  \n" +
             "| |      | |  | |  |_   _|  / ____|  |_   _| \n" +
@@ -16,10 +19,10 @@ public class LuigiUI {
     String greeting = "Hello! I am Luigi!\nWhat can I do for you?\n" +
             "_____________________________________________";
 
-    public LuigiUI() {
-    }
+    String expected = luigiLogo + "\n" + greeting;
 
-    public String printUI() {
-        return luigiLogo + "\n" + greeting;
+    @Test
+    public void luigiUITest() {
+        assertEquals(expected, new LuigiUI().printUI());
     }
 }

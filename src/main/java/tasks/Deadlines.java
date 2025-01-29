@@ -19,7 +19,7 @@ public class Deadlines extends TasksDefault {
     @Override
     public String getDescription() {
         StringBuilder str = new StringBuilder();
-        str.append("[D]").append(super.getDescription()).append(" (by: ").append(deadlineDate).append(" )");
+        str.append("[D]").append(super.getDescription()).append(" (by: ").append(deadlineDate).append(")");
         return str.toString();
     }
 
