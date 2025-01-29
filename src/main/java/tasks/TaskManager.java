@@ -5,6 +5,12 @@ import exceptions.InvalidCommandException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Contains all the current tasks in the form of a list.
+ * Able to list all the tasks out.
+ * Able to add and delete tasks.
+ * Able to get the total number of tasks and the remaining number of tasks unmarked.
+ */
 public class TaskManager {
     private List<TasksDefault> tasksList;
 
@@ -12,6 +18,9 @@ public class TaskManager {
         this.tasksList = new ArrayList<>();
     }
 
+    /**
+     * Lists all the tasks in the list by iterating through the list.
+     */
     public void listTasks() {
         StringBuilder str = new StringBuilder();
         str.append("_____________________________________________\n");
@@ -55,6 +64,9 @@ public class TaskManager {
         return tasksList;
     }
 
+    /**
+     * Get the remaining number of tasks by iterating through the list and finding out which tasks are still unmarked.
+     */
     public void getRemainingTasks() {
         int remainingTasks = 0;
         StringBuilder str = new StringBuilder();

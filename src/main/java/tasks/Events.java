@@ -2,11 +2,20 @@ package tasks;
 
 import datetimeutility.DateTimeConversion;
 
+/**
+ * Events task which contains a task description, marked or unmarked state, and a from and to date.
+ */
 public class Events extends TasksDefault {
 
     private String fromString;
     private String toString;
 
+    /**
+     * Events instance.
+     * @param description task description.
+     * @param fromString from date.
+     * @param toString to date.
+     */
     public Events(String description, String fromString, String toString) {
         super(description, "[E]");
         String[] fromStringArray = fromString.trim().split(" ");

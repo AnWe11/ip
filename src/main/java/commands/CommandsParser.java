@@ -4,8 +4,14 @@ import exceptions.InvalidCommandException;
 import storage.Data;
 import tasks.*;
 
+/**
+ * Parser class to take in the user's input call the respective methods.
+ */
 public class CommandsParser {
 
+    /**
+     * List of command keywords the user can input that will trigger a method call.
+     */
     enum Keywords {
         BYE, LIST, MARK, UNMARK, TODO, DEADLINE, EVENT, DELETE, INVALID;
 
@@ -20,7 +26,13 @@ public class CommandsParser {
 
     private String commandWord = null;
 
-    //Constructor for Commands
+    /**
+     * Command parser that takes in one input string and calls its respective method.
+     * @param input Command input string.
+     * @param taskManager TaskManager class instance.
+     * @param data Storage class instance.
+     * @throws InvalidCommandException If first word of the input is not in the list of keywords.
+     */
     public CommandsParser(String input, TaskManager taskManager, Data data) throws InvalidCommandException {
 
         try {

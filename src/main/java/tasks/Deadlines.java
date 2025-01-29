@@ -3,10 +3,19 @@ package tasks;
 import datetimeutility.DateTimeConversion;
 import exceptions.InvalidDateException;
 
+/**
+ * Deadlines task which contains a task description, marked or unmarked state, and a deadline date.
+ */
 public class Deadlines extends TasksDefault {
 
     private String deadlineDate;
 
+    /**
+     * Deadlines instance.
+     * @param description task description.
+     * @param deadlineDate deadline date.
+     * @throws InvalidDateException If there is no deadline date provided or it is in the wrong format.
+     */
     public Deadlines(String description, String deadlineDate) throws InvalidDateException {
         super(description, "[D]");
         String[] deadlineDateArray = deadlineDate.trim().split(" ");

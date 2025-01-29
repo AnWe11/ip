@@ -1,5 +1,8 @@
 package tasks;
 
+/**
+ * todo task which only contains a task description.
+ */
 public class ToDo extends TasksDefault {
 
     public ToDo(String description) {

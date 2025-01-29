@@ -7,12 +7,23 @@ import tasks.TasksDefault;
 
 import java.io.IOException;
 
+/**
+ * Method call if command word is 'mark' or 'unmark'.
+ * Mark or unmark the specified task and updates the taskManager class and Storage class.
+ */
 public class MarkUnmarkCase implements DefaultCase {
     private String input;
     private CommandsParser.Keywords keyword;
     private TaskManager taskManager;
     private Data data;
 
+    /**
+     * MarkUnmarkCase instance.
+     * @param input taskID of the task the user wants to mark or unmark.
+     * @param keyword command word, whether it is 'mark' or 'unmark'.
+     * @param taskManager TaskManager class instance.
+     * @param data Storage class instance.
+     */
     MarkUnmarkCase(String input, CommandsParser.Keywords keyword, TaskManager taskManager, Data data) {
         this.input = input;
         this.keyword = keyword;
@@ -20,6 +31,13 @@ public class MarkUnmarkCase implements DefaultCase {
         this.data = data;
     }
 
+    /**
+     * Retrieves the taskID of the task to mark or unmark.
+     * Checks if the taskID is provided and is valid.
+     * If the command word is 'mark', mark the specified task, else, unmark it.
+     * Updates the TaskManager class and Storage class on the mark/unmark state of the specified task.
+     * @throws InvalidCommandException
+     */
     @Override
     public void action() throws InvalidCommandException {
         try {

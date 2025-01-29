@@ -9,6 +9,9 @@ import ui.LuigiUI;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Class that initiates the Luigi Chatbot.
+ */
 public class Luigi {
 
     public static void main(String[] args) throws InvalidCommandException, IOException {
