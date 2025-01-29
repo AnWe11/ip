@@ -25,6 +25,8 @@ public class Luigi {
             Scanner scanner = new Scanner(System.in);
             String input;
 
+            luigiUI.printUI();
+
             while(true) {
                 //Reads input from user and decides what to do
                 input = scanner.nextLine();

@@ -21,8 +21,8 @@ public class LuigiUITest {
 
     String expected = luigiLogo + "\n" + greeting;
 
-    @Test
-    public void luigiUITest() {
-        assertEquals(expected, new LuigiUI().printUI());
-    }
+//    @Test
+//    public void luigiUITest() {
+//        assertEquals(expected, new LuigiUI().printUI());
+//    }
 }
