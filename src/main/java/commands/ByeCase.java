@@ -8,6 +8,7 @@ public class ByeCase implements DefaultCase {
     public void action() {
         System.out.println("Goodbye! Hope to see you again soon!"+
                 "\n_____________________________________________");
+        System.exit(0);
     }
 
 }
