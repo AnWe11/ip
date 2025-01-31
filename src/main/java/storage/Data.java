@@ -9,15 +9,14 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * Storage class that writes data to a text file to save the current tasks and their states.
- * This class can also load the tasks back from the same text file whenever the Chatbot starts.
+ * Saves and loads data.
  */
 public class Data {
 
     File file;
 
     /**
-     * Searches for the specified text file, if there already exists the text file, do nothing, else create the text file.
+     * Creates new textfile.
      */
     public Data() {
         String fileName = "taskData.txt";
@@ -36,7 +35,7 @@ public class Data {
     }
 
     /**
-     * Writes the list of tasks and their states in the TaskManager class in the specified text file.
+     * Writes data to text file.
      * @param taskManager TaskManager Class instance,
      * @throws IOException If there is an error when trying to write to the text file.
      */
@@ -64,7 +63,7 @@ public class Data {
     }
 
     /**
-     * Reads the texts from the specified text file and loads them into the TaskManager class.
+     * Loads data from text file.
      * @param taskManager TaskManager class instance,
      * @throws IOException If there is an error when trying to read from the text file.
      */

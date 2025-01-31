@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Method call if command word is 'find', prints the tasks in the task list that contains the matching keyword.
+ * Returns a task list with the matching keyword.
  */
 public class FindCase implements DefaultCase {
 
@@ -21,9 +21,9 @@ public class FindCase implements DefaultCase {
     }
 
     /**
-     * Method call to print list of tasks that contains the keyword.
-     * Checks if keyword is valid.
-     * Prints the tasks in the current list that contains the keyword in their task description.
+     * Returns a list of tasks that contains the keyword.
+     * If keyword is empty, throw exception.
+     * @throws InvalidCommandException If keyword is not provided.
      */
     @Override
     public void action() throws InvalidCommandException {

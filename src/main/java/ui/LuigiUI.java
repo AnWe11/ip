@@ -1,7 +1,7 @@
 package ui;
 
 /**
- * UI design of the Luigi Chatbot.
+ * Prints Luigi UI.
  */
 public class LuigiUI {
 

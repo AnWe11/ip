@@ -6,10 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Contains all the current tasks in the form of a list.
- * Able to list all the tasks out.
- * Able to add and delete tasks.
- * Able to get the total number of tasks and the remaining number of tasks unmarked.
+ * Prints list of tasks.
+ * Adds / removes tasks from list of tasks.
  */
 public class TaskManager {
     private List<TasksDefault> tasksList;

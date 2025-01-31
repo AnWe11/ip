@@ -1,7 +1,7 @@
 package tasks;
 
 /**
- * todo task which only contains a task description.
+ * Adds todo task.
  */
 public class ToDo extends TasksDefault {
 

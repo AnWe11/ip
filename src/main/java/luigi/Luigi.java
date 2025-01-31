@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * Class that initiates the Luigi Chatbot.
+ * Initiates the Luigi Chatbot.
  */
 public class Luigi {
 

@@ -8,9 +8,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Date Time Conversion class to convert dates and time.
- * Converts dates from 2025-01-29 to Jan 29 2025 and vice versa.
- * Converts time from 24-hour formats to 12 hour formats with AM/PM.
+ * Returns date time in different formats.
  */
 public class DateTimeConversion {
     private static final DateTimeFormatter TIME_INPUT_FORMAT = DateTimeFormatter.ofPattern("HHmm");
@@ -21,7 +19,7 @@ public class DateTimeConversion {
     private static final DateTimeFormatter LOAD_DATA_OUTPUT_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
     /**
-     * Converts 24 hour time with format 1800 to 12-hour format with AM/PM, 6:00 PM.
+     * Returns 12-hour format with AM/PM, 6:00 PM, from 24 hour time with format 1800.
      * @param time24Hour 24-hour String format time
      * @return 12-hour format time with AM/PM String
      * @throws InvalidDateException If given input time is in the invalid format.

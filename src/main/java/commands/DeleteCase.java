@@ -8,7 +8,7 @@ import tasks.TasksDefault;
 import java.io.IOException;
 
 /**
- * Method call if command word is 'delete', delete a specific task from the list of tasks.
+ * Deletes a task.
  */
 public class DeleteCase implements DefaultCase {
     private TaskManager taskManager;
@@ -16,12 +16,6 @@ public class DeleteCase implements DefaultCase {
     private int taskID;
     private Data data;
 
-    /**
-     * DeleteCase instance.
-     * @param input taskID of the task to be deleted.
-     * @param taskManager TaskManager class instance.
-     * @param data Storage class instance.
-     */
     public DeleteCase(String input, TaskManager taskManager, Data data) {
         this.taskManager = taskManager;
         this.input = input;
@@ -29,8 +23,8 @@ public class DeleteCase implements DefaultCase {
     }
 
     /**
-     * Deletes the specified taskID inputted by the user from the TaskManager class list array.
-     * Updates the Storage class.
+     * Deletes the specified task based on taskID.
+     * If taskID is empty, throw exception.
      * @throws InvalidCommandException If there is no taskID provided on which task to delete.
      */
     @Override

@@ -9,19 +9,13 @@ import tasks.TaskManager;
 import java.io.IOException;
 
 /**
- * Method call if command word is 'deadline', creates a deadline task instance.
+ * Adds a deadline task.
  */
 public class DeadlineCase implements DefaultCase {
     private TaskManager taskManager;
     private String input;
     private Data data;
 
-    /**
-     * DeadlineCase instance.
-     * @param input input String containing the task description and deadline date.
-     * @param taskManager TaskManager class instance.
-     * @param data Storage class instance.
-     */
     public DeadlineCase(String input, TaskManager taskManager, Data data) {
         this.taskManager = taskManager;
         this.input = input;
@@ -29,9 +23,8 @@ public class DeadlineCase implements DefaultCase {
     }
 
     /**
-     * Splits the input String to separate the task description and deadline date.
-     * Checks if the input string and deadline date is valid.
-     * Creates a deadline task and update it in the TaskManager class and in the Storage class.
+     * Adds a deadline task.
+     * If task description or date is empty, throw exception.
      * @throws InvalidCommandException If task description is empty.
      */
     @Override

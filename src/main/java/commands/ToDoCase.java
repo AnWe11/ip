@@ -8,19 +8,13 @@ import tasks.ToDo;
 import java.io.IOException;
 
 /**
- * Method call if command word is 'todo', creates a todo task instance.
+ * Adds a todo task.
  */
 public class ToDoCase implements DefaultCase {
     private TaskManager taskManager;
     private String input;
     private Data data;
 
-    /**
-     * ToDoCase instance.
-     * @param input input String containing only task description.
-     * @param taskManager TaskManager class instance.
-     * @param data Storage class instance.
-     */
     public ToDoCase(String input, TaskManager taskManager, Data data) {
         this.taskManager = taskManager;
         this.input = input;
@@ -28,10 +22,9 @@ public class ToDoCase implements DefaultCase {
     }
 
     /**
-     * Splits the input String to retrieve the task description.
-     * Checks if the input string is valid.
-     * Creates a todo task and update it in the TaskManager class and in the Storage class.
-     * @throws InvalidCommandException If task description is empty
+     * Adds a todo task.
+     * If task description is empty, throw exception.
+     * @throws InvalidCommandException If task description is empty.
      */
     @Override
     public void action() throws InvalidCommandException {

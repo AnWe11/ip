@@ -4,9 +4,7 @@
 package tasks;
 
 /**
- * Base task which todo, deadline, and event task inherits from.
- * Able to get the task description.
- * Able to mark and unmark tasks.
+ * Adds task.
  */
 public class TasksDefault {
 
@@ -21,11 +19,6 @@ public class TasksDefault {
     private static int totalTasks = 0;
     private static int totalTasksDone = 0;
 
-    /**
-     * TasksDefault instance
-     * @param description task description
-     * @param taskType task Type, whether it is a todo, deadline, or event task.
-     */
     public TasksDefault(String description, String taskType) {
         this.description = description;
         this.taskID = id++;
