@@ -14,6 +14,8 @@ import java.util.Scanner;
  */
 public class Luigi {
 
+    private static String luigiResponse = "";
+
     public static void main(String[] args) throws InvalidCommandException, IOException {
 
         try {
@@ -22,14 +24,14 @@ public class Luigi {
             Data data = new Data();
             data.loadData(taskManager);
 
-            Scanner scanner = new Scanner(System.in);
-            String input;
+//            Scanner scanner = new Scanner(System.in);
+//            String input;
 
             luigiUI.printUI();
 
             while(true) {
                 //Reads input from user and decides what to do
-                input = scanner.nextLine();
+                String input = args[0];
                 CommandsParser command = new CommandsParser(input, taskManager, data);
             }
         } catch (InvalidCommandException e) {
@@ -38,6 +40,11 @@ public class Luigi {
             System.out.println("IO Exception in main" + e.getMessage());
         }
 
+    }
+
+    public static String getResponse() {
+
+        return "Luigi heard: " + luigiResponse;
     }
 
 }

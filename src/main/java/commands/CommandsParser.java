@@ -9,6 +9,7 @@ import tasks.*;
  */
 public class CommandsParser {
 
+    private String luigiResponse;
 
     // List of command keywords the user can input that will trigger a method call.
     enum Keywords {
@@ -84,5 +85,9 @@ public class CommandsParser {
             System.out.println(e.getMessage());
         }
 
+    }
+
+    public String getLuigiResponse() {
+        return this.luigiResponse;
     }
 }
