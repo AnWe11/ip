@@ -11,10 +11,8 @@ public class ByeCase implements DefaultCase {
      * Returns goodbye message and exit the program.
      */
     @Override
-    public void action() {
-        System.out.println("Goodbye! Hope to see you again soon!"+
-                "\n_____________________________________________");
-        System.exit(0);
+    public String action() {
+        return "Goodbye! Hope to see you again soon!";
     }
 
 }

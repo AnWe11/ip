@@ -14,30 +14,49 @@ import java.util.Scanner;
  */
 public class Luigi {
 
-    public static void main(String[] args) throws InvalidCommandException, IOException {
+//    public static void main(String[] args) throws InvalidCommandException, IOException {
+//
+//        try {
+//            LuigiUI luigiUI = new LuigiUI();
+//            TaskManager taskManager = new TaskManager();
+//            Data data = new Data();
+//            data.loadData(taskManager);
+//
+//            Scanner scanner = new Scanner(System.in);
+//            String input;
+//
+//            luigiUI.printUI();
+//
+//            while(true) {
+//                //Reads input from user and decides what to do
+//                input = scanner.nextLine();
+//                CommandsParser command = new CommandsParser(input, taskManager, data);
+//            }
+//        } catch (InvalidCommandException e) {
+//            System.out.println("Invalid Command Exception in main" + e.getMessage());
+//        } catch (IOException e) {
+//            System.out.println("IO Exception in main" + e.getMessage());
+//        }
+//    }
 
+    public static String getResponse(String userInput) throws InvalidCommandException, IOException {
+        String responseString = "";
+        
         try {
-            LuigiUI luigiUI = new LuigiUI();
             TaskManager taskManager = new TaskManager();
             Data data = new Data();
             data.loadData(taskManager);
 
-            Scanner scanner = new Scanner(System.in);
-            String input;
-
-            luigiUI.printUI();
-
-            while(true) {
-                //Reads input from user and decides what to do
-                input = scanner.nextLine();
-                CommandsParser command = new CommandsParser(input, taskManager, data);
-            }
+            CommandsParser command = new CommandsParser(userInput, taskManager, data);
+            responseString = command.getResponseString();
         } catch (InvalidCommandException e) {
             System.out.println("Invalid Command Exception in main" + e.getMessage());
+            responseString = "Invalid Command Exception in main" + e.getMessage();
         } catch (IOException e) {
             System.out.println("IO Exception in main" + e.getMessage());
+            responseString = "IO Exception in main" + e.getMessage();
         }
-
+        return responseString;
     }
 
 }

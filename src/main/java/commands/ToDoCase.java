@@ -27,27 +27,29 @@ public class ToDoCase implements DefaultCase {
      * @throws InvalidCommandException If task description is empty.
      */
     @Override
-    public void action() throws InvalidCommandException {
+    public String action() throws InvalidCommandException {
         String taskDescription;
+        String responseString;
         try {
             int firstSpaceIndex = input.indexOf(" ");
             //Return everything after first space or empty string if no space
             if ((firstSpaceIndex == -1) || firstSpaceIndex == input.length() - 1) {
                 throw new InvalidCommandException("Oops! The task description of todo cannot be empty :(");
             }
-
             taskDescription = input.substring(firstSpaceIndex + 1);
             ToDo todoTask = new ToDo(taskDescription);
-            taskManager.addTask(todoTask);
+            responseString = taskManager.addTask(todoTask);
             data.saveData(taskManager);
         } catch (InvalidCommandException e) {
             System.out.println(e.getMessage());
-            System.out.println("_____________________________________________");
-            System.out.println("Input format for todo tasks should be\ntodo <Task Description>");
-            System.out.println("_____________________________________________");
-            taskDescription = "";
+            //System.out.println("_____________________________________________");
+            //System.out.println("Input format for todo tasks should be\ntodo <Task Description>");
+            //System.out.println("_____________________________________________");
+            responseString = "Input format for todo tasks should be\ntodo <Task Description>";
         } catch (IOException e) {
-            System.out.println("Unable to save todo task: " + e.getMessage());
+            responseString = "Unable to save todo task: " + e.getMessage();
+            //System.out.println("Unable to save todo task: " + e.getMessage());
         }
+        return responseString;
     }
 }

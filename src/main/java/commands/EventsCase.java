@@ -27,7 +27,8 @@ public class EventsCase implements DefaultCase {
      * @throws InvalidCommandException If user did not include a task description or the from and to dates.
      */
     @Override
-    public void action() throws InvalidCommandException {
+    public String action() throws InvalidCommandException {
+        String responseString;
         String taskDescription;
         try {
             int firstSpaceIndex = input.indexOf(" ");
@@ -47,17 +48,20 @@ public class EventsCase implements DefaultCase {
             String fromString = fromToString[0];
             String toString = fromToString[1];
             Events eventsTask = new Events(taskDescription, fromString, toString);
-            taskManager.addTask(eventsTask);
+            responseString = taskManager.addTask(eventsTask);
             data.saveData(taskManager);
         } catch (InvalidCommandException e) {
             System.out.println(e.getMessage());
-            System.out.println("_____________________________________________");
-            System.out.println("Input format for events tasks should be\nevent <Task Description> /from <from date> /to <to date>");
-            System.out.println("_____________________________________________");
+//            System.out.println("_____________________________________________");
+//            System.out.println("Input format for events tasks should be\nevent <Task Description> /from <from date> /to <to date>");
+//            System.out.println("_____________________________________________");
             taskDescription = "";
+            responseString = "Input format for events tasks should be\nevent <Task Description> /from <from date> /to <to date>";
         } catch (IOException e) {
             System.out.println("Unable to save Events Task: " + e.getMessage());
+            responseString = "Unable to save Events Task: " + e.getMessage();
         }
+        return responseString;
     }
 
 }

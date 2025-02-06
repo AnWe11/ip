@@ -28,10 +28,10 @@ public class DeadlineCase implements DefaultCase {
      * @throws InvalidCommandException If task description is empty.
      */
     @Override
-    public void action() throws InvalidCommandException {
+    public String action() throws InvalidCommandException {
+        String responseString;
         String taskDescription;
         try {
-
             int firstSpaceIndex = input.indexOf(" ");
             //Return everything after first space or empty string if no space
             if ((firstSpaceIndex == -1) || firstSpaceIndex == input.length() - 1) {
@@ -47,18 +47,22 @@ public class DeadlineCase implements DefaultCase {
             taskDescription = parts[0];
             String deadlineString = parts[1];
             Deadlines deadlineTask = new Deadlines(taskDescription, deadlineString);
-            taskManager.addTask(deadlineTask);
+            responseString = taskManager.addTask(deadlineTask);
             data.saveData(taskManager);
         } catch (InvalidCommandException e) {
             System.out.println(e.getMessage());
-            System.out.println("_____________________________________________");
-            System.out.println("Input format for deadline tasks should be\ndeadline <Task Description> /by <deadline date>");
-            System.out.println("_____________________________________________");
+//            System.out.println("_____________________________________________");
+//            System.out.println("Input format for deadline tasks should be\ndeadline <Task Description> /by <deadline date>");
+//            System.out.println("_____________________________________________");
             taskDescription = "";
+            responseString = "Input format for deadline tasks should be\ndeadline <Task Description> /by <deadline date>";
         } catch (IOException e) {
             System.out.println("Unable to save deadline Task: " + e.getMessage());
+            responseString = "Unable to save deadline Task: " + e.getMessage();
         } catch (InvalidDateException e) {
             System.out.println("Invalid date / date format " + e.getMessage());
+            responseString = "Invalid date / date format " + e.getMessage();
         }
+        return responseString;
     }
 }

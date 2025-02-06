@@ -26,10 +26,10 @@ public class FindCase implements DefaultCase {
      * @throws InvalidCommandException If keyword is not provided.
      */
     @Override
-    public void action() throws InvalidCommandException {
+    public String action() throws InvalidCommandException {
+        StringBuilder str = new StringBuilder();
         try {
             List<TasksDefault> findTasksList = new ArrayList<TasksDefault>();
-            StringBuilder str = new StringBuilder();
 
             int firstSpaceIndex = input.indexOf(" ");
             //Return everything after first space or empty string if no space
@@ -47,18 +47,19 @@ public class FindCase implements DefaultCase {
 
             System.out.println("_____________________________________________");
             if (!findTasksList.isEmpty()) {
-                System.out.println("Here are the tasks matching the keyword " + keyword + ":");
+                str.append("Here are the tasks matching the keyword ").append(keyword).append(":").append("\n");
+                //System.out.println("Here are the tasks matching the keyword " + keyword + ":");
                 for (int i = 0; i < findTasksList.size(); i++) {
                     str.append(i+1).append(".").append(findTasksList.get(i).getDescription()).append("\n");
                 }
             } else {
                 str.append("No tasks matching the keyword '").append(keyword).append("' was found.").append("\n");
             }
-            str.append("_____________________________________________\n");
-            System.out.println(str);
+//            str.append("_____________________________________________\n");
         } catch (InvalidCommandException e) {
             System.out.println(e.getMessage());
+            str.append(e.getMessage());
         }
-
+        return str.toString();
     }
 }
