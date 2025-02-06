@@ -42,13 +42,9 @@ public class ToDoCase implements DefaultCase {
             data.saveData(taskManager);
         } catch (InvalidCommandException e) {
             System.out.println(e.getMessage());
-            //System.out.println("_____________________________________________");
-            //System.out.println("Input format for todo tasks should be\ntodo <Task Description>");
-            //System.out.println("_____________________________________________");
             responseString = "Input format for todo tasks should be\ntodo <Task Description>";
         } catch (IOException e) {
             responseString = "Unable to save todo task: " + e.getMessage();
-            //System.out.println("Unable to save todo task: " + e.getMessage());
         }
         return responseString;
     }
