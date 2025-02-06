@@ -6,5 +6,5 @@ import exceptions.InvalidCommandException;
  * Implements abstract method action().
  */
 public interface DefaultCase {
-    public abstract void action() throws InvalidCommandException;
+    public abstract String action() throws InvalidCommandException;
 }

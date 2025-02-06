@@ -28,7 +28,8 @@ public class DeleteCase implements DefaultCase {
      * @throws InvalidCommandException If there is no taskID provided on which task to delete.
      */
     @Override
-    public void action() throws InvalidCommandException {
+    public String action() throws InvalidCommandException {
+        String responseString;
         try {
             int firstSpaceIndex = input.indexOf(" ");
             //Return everything after first space or empty string if no space
@@ -36,15 +37,18 @@ public class DeleteCase implements DefaultCase {
                 throw new InvalidCommandException("o.O You did not specify which task you would like to delete");
             }
             this.taskID = Integer.parseInt(input.substring(firstSpaceIndex + 1));
-            taskManager.removeTask(this.taskID);
+            responseString = taskManager.removeTask(this.taskID);
             data.saveData(taskManager);
         } catch (InvalidCommandException e) {
             System.out.println(e.getMessage());
             System.out.println("_____________________________________________");
             System.out.println("Input format to delete task should be \ndelete <task ID>");
             System.out.println("_____________________________________________\n");
+            responseString = "Input format to delete task should be \ndelete <task ID>";
         } catch (IOException e) {
             System.out.println("Something went wrong when trying to save the deleted task: " + e.getMessage());
+            responseString = "Something went wrong when trying to save the deleted task: " + e.getMessage();
         }
+        return responseString;
     }
 }

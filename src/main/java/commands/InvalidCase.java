@@ -14,11 +14,11 @@ public class InvalidCase implements DefaultCase {
     }
 
     /**
-     * Throws an InvalidCommandException.
-     * @throws InvalidCommandException If given command is not in the list of valid keywords expected.
+     * Returns an invalid command string.
      */
     @Override
-    public void action() throws InvalidCommandException {
-        throw new InvalidCommandException("Invalid command: " + error);
+    public String action() {
+        return "Invalid command: " + error;
+//        throw new InvalidCommandException("Invalid command: " + error);
     }
 }

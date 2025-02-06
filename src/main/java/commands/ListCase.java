@@ -16,7 +16,7 @@ public class ListCase implements DefaultCase {
      * Prints the list of tasks.
      */
     @Override
-    public void action() {
-       this.taskManager.listTasks();
+    public String action() {
+       return this.taskManager.listTasks();
     }
 }

@@ -24,6 +24,7 @@ public class CommandsParser {
     }
 
     private String commandWord = null;
+    private String responseString;
 
     /**
      * Returns respective methods.
@@ -44,45 +45,48 @@ public class CommandsParser {
             switch (keyword) {
             case TODO:
                 ToDoCase todoCase = new ToDoCase(input, taskManager, data);
-                todoCase.action();
+                responseString = todoCase.action();
                 break;
             case DEADLINE:
                 DeadlineCase deadlineCase = new DeadlineCase(input, taskManager, data);
-                deadlineCase.action();
+                responseString = deadlineCase.action();
                 break;
             case EVENT:
                 EventsCase eventCase = new EventsCase(input, taskManager, data);
-                eventCase.action();
+                responseString = eventCase.action();
                 break;
             case LIST:
                 ListCase listCase = new ListCase(taskManager);
-                listCase.action();
+                responseString = listCase.action();
                 break;
             case MARK:
             case UNMARK:
                 MarkUnmarkCase markUnmarkCase = new MarkUnmarkCase(input, keyword, taskManager, data);
-                markUnmarkCase.action();
+                responseString = markUnmarkCase.action();
                 break;
             case BYE:
                 ByeCase byeCase = new ByeCase();
-                byeCase.action();
+                responseString = byeCase.action();
                 break;
             case DELETE:
                 DeleteCase deleteCase = new DeleteCase(input, taskManager, data);
-                deleteCase.action();
+                responseString = deleteCase.action();
                 break;
             case FIND:
                 FindCase findCase = new FindCase(input, taskManager);
-                findCase.action();
+                responseString = findCase.action();
                 break;
             case INVALID:
                 InvalidCase invalidCase = new InvalidCase(input);
-                invalidCase.action();
+                responseString = invalidCase.action();
                 break;
             }
         } catch (InvalidCommandException e) {
             System.out.println(e.getMessage());
+            responseString = e.getMessage();
         }
-
+    }
+    public String getResponseString() {
+        return this.responseString;
     }
 }
