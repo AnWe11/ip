@@ -37,6 +37,7 @@ public class DeleteCase implements DefaultCase {
                 throw new InvalidCommandException("o.O You did not specify which task you would like to delete");
             }
             this.taskID = Integer.parseInt(input.substring(firstSpaceIndex + 1));
+            assert taskID > 0 && taskID <= taskManager.getTotalTasks(): "Not a valid task ID";
             responseString = taskManager.removeTask(this.taskID);
             data.saveData(taskManager);
         } catch (InvalidCommandException e) {
