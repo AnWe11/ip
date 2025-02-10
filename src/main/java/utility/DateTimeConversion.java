@@ -1,4 +1,4 @@
-package datetimeutility;
+package utility;
 
 import exceptions.InvalidDateException;
 

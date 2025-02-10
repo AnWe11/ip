@@ -4,6 +4,7 @@ import exceptions.InvalidCommandException;
 import storage.Data;
 import tasks.TaskManager;
 import tasks.ToDo;
+import utility.StringChecker;
 
 import java.io.IOException;
 
@@ -31,12 +32,7 @@ public class ToDoCase implements DefaultCase {
         String taskDescription;
         String responseString;
         try {
-            int firstSpaceIndex = input.indexOf(" ");
-            //Return everything after first space or empty string if no space
-            if ((firstSpaceIndex == -1) || firstSpaceIndex == input.length() - 1) {
-                throw new InvalidCommandException("Oops! The task description of todo cannot be empty :(");
-            }
-            taskDescription = input.substring(firstSpaceIndex + 1);
+            taskDescription = StringChecker.checkString(input);
             ToDo todoTask = new ToDo(taskDescription);
             responseString = taskManager.addTask(todoTask);
             data.saveData(taskManager);

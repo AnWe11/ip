@@ -4,6 +4,7 @@ import exceptions.InvalidCommandException;
 import storage.Data;
 import tasks.TaskManager;
 import tasks.TasksDefault;
+import utility.StringChecker;
 
 import java.io.IOException;
 
@@ -31,12 +32,7 @@ public class DeleteCase implements DefaultCase {
     public String action() throws InvalidCommandException {
         String responseString;
         try {
-            int firstSpaceIndex = input.indexOf(" ");
-            //Return everything after first space or empty string if no space
-            if ((firstSpaceIndex == -1) || firstSpaceIndex == input.length() - 1) {
-                throw new InvalidCommandException("o.O You did not specify which task you would like to delete");
-            }
-            this.taskID = Integer.parseInt(input.substring(firstSpaceIndex + 1));
+            this.taskID = Integer.parseInt(StringChecker.checkString(input));
             assert taskID > 0 && taskID <= taskManager.getTotalTasks(): "Not a valid task ID";
             responseString = taskManager.removeTask(this.taskID);
             data.saveData(taskManager);

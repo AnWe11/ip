@@ -5,6 +5,7 @@ import exceptions.InvalidDateException;
 import storage.Data;
 import tasks.Deadlines;
 import tasks.TaskManager;
+import utility.StringChecker;
 
 import java.io.IOException;
 
@@ -32,13 +33,7 @@ public class DeadlineCase implements DefaultCase {
         String responseString;
         String taskDescription;
         try {
-            int firstSpaceIndex = input.indexOf(" ");
-            //Return everything after first space or empty string if no space
-            if ((firstSpaceIndex == -1) || firstSpaceIndex == input.length() - 1) {
-                throw new InvalidCommandException("Luigi is sad because there is no task description )':");
-            }
-            taskDescription = input.substring(firstSpaceIndex + 1);
-
+            taskDescription = StringChecker.checkString(input);
             if (!taskDescription.contains("/by")) {
                 throw new InvalidCommandException("Oops! You did not specify a deadline date D:");
             }

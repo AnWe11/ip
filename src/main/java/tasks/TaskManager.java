@@ -21,7 +21,7 @@ public class  TaskManager {
      */
     public String listTasks() {
         StringBuilder str = new StringBuilder();
-        str.append("Here are the tasks in your list:");
+        str.append("Here are the tasks in your list: \n");
         for(int i = 0; i < tasksList.size(); i++) {
             str.append(i+1).append(". ").append(tasksList.get(i).getDescription()).append("\n");
         }
@@ -35,8 +35,9 @@ public class  TaskManager {
     public String addTask(TasksDefault task) {
         tasksList.add(task);
         StringBuilder str = new StringBuilder();
-        str.append(task.getDescription()).append("\n").append("You currently have ").append(tasksList.size())
-                .append(" task(s) in the list.");
+        str.append("I have added: ");
+        str.append(task.getDescription()).append("to the list").append("\n").
+                append("You currently have ").append(tasksList.size()).append(" task(s) in the list.");
         return str.toString();
     }
 
