@@ -16,6 +16,9 @@ public class Main extends Application {
 
     private Luigi luigi = new Luigi();
 
+    public Main() throws IOException {
+    }
+
     @Override
     public void start(Stage stage) {
         try {

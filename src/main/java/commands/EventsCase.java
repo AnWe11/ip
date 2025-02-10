@@ -4,6 +4,7 @@ import exceptions.InvalidCommandException;
 import storage.Data;
 import tasks.Events;
 import tasks.TaskManager;
+import utility.StringChecker;
 
 import java.io.IOException;
 
@@ -31,12 +32,7 @@ public class EventsCase implements DefaultCase {
         String responseString;
         String taskDescription;
         try {
-            int firstSpaceIndex = input.indexOf(" ");
-            //Return everything after first space or empty string if no space
-            if ((firstSpaceIndex == -1) || firstSpaceIndex == input.length() - 1) {
-                throw new InvalidCommandException(":((((((((( You did not include a task description");
-            }
-            taskDescription = input.substring(firstSpaceIndex + 1);
+            taskDescription = StringChecker.checkString(input);
 
             if (!(taskDescription.contains("/from") && taskDescription.contains("/to"))) {
                 throw new InvalidCommandException("The schedule timing is missing! ._.");

@@ -3,6 +3,7 @@ package commands;
 import exceptions.InvalidCommandException;
 import tasks.TaskManager;
 import tasks.TasksDefault;
+import utility.StringChecker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,13 +32,7 @@ public class FindCase implements DefaultCase {
         try {
             List<TasksDefault> findTasksList = new ArrayList<TasksDefault>();
 
-            int firstSpaceIndex = input.indexOf(" ");
-            //Return everything after first space or empty string if no space
-            if ((firstSpaceIndex == -1) || firstSpaceIndex == input.length() - 1) {
-                throw new InvalidCommandException("You did not specify a keyword to find :<");
-            }
-
-            String keyword = input.substring(firstSpaceIndex + 1);
+            String keyword = StringChecker.checkString(input);
 
             for (TasksDefault task : taskManager.getTasksList()) {
                 if (task.getTaskDescription().contains(keyword)) {
