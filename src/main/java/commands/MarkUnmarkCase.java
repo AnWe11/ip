@@ -53,6 +53,7 @@ public class MarkUnmarkCase implements DefaultCase {
             }
             data.saveData(this.taskManager);
             str.append(currTask.getDescription());
+            str.append(taskManager.getRemainingTasks());
         } catch (InvalidCommandException e) {
             str.append("Input format to mark task should be \nmark <task ID>");
         } catch (InvalidIDException e) {
