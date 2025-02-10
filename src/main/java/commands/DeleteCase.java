@@ -33,6 +33,7 @@ public class DeleteCase implements DefaultCase {
         String responseString;
         try {
             this.taskID = Integer.parseInt(StringChecker.checkString(input));
+            assert taskID > 0 && taskID <= taskManager.getTotalTasks(): "Not a valid task ID";
             responseString = taskManager.removeTask(this.taskID);
             data.saveData(taskManager);
         } catch (InvalidCommandException e) {

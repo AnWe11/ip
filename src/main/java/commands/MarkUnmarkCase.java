@@ -34,6 +34,8 @@ public class MarkUnmarkCase implements DefaultCase {
         StringBuilder str = new StringBuilder();
         try {
             int taskID = Integer.parseInt(StringChecker.checkString(input));
+            assert taskID > 0 && taskID <= taskManager.getTotalTasks(): "Not a valid task ID";
+          
             TasksDefault currTask;
             if (taskID >= 0 && taskID <= taskManager.getTotalTasks()) {
                 currTask = taskManager.getTask(taskID);
