@@ -4,6 +4,7 @@ import exceptions.InvalidCommandException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Prints list of tasks.
@@ -20,12 +21,15 @@ public class  TaskManager {
      * Lists all the tasks in the list by iterating through the list.
      */
     public String listTasks() {
-        StringBuilder str = new StringBuilder();
-        str.append("Here are the tasks in your list:");
-        for(int i = 0; i < tasksList.size(); i++) {
-            str.append(i+1).append(". ").append(tasksList.get(i).getDescription()).append("\n");
-        }
-        return str.toString();
+//        StringBuilder str = new StringBuilder();
+//        str.append("Here are the tasks in your list:");
+//        for(int i = 0; i < tasksList.size(); i++) {
+//            str.append(i+1).append(". ").append(tasksList.get(i).getDescription()).append("\n");
+//        }
+//        return str.toString();
+        return "Here are the tasks in your list: \n" +
+                tasksList.stream().map(TasksDefault::getDescription)
+                        .collect(Collectors.joining("\n"));
     }
 
     public TasksDefault getTask(int taskID) throws InvalidCommandException {
@@ -61,21 +65,17 @@ public class  TaskManager {
     /**
      * Get the remaining number of tasks by iterating through the list and finding out which tasks are still unmarked.
      */
-    public void getRemainingTasks() {
-        int remainingTasks = 0;
-        StringBuilder str = new StringBuilder();
+    public String getRemainingTasks() {
 
-        for(TasksDefault entry : this.tasksList) {
-            if (entry.isDone()) {
-                remainingTasks++;
-            }
-        }
-        remainingTasks = tasksList.size() - remainingTasks;
-        if (remainingTasks == 0) {
-            str.append("Congratulations! You have completed all your tasks! :)");
-        } else {
-            str.append("You have ").append(remainingTasks).append(" tasks left to complete!");
-        }
-        System.out.println(str.toString());
+        int tasksDone = (int) tasksList.stream()
+                                       .filter(TasksDefault::isDone)
+                                       .count();
+
+        int remainingTasks = tasksList.size() - tasksDone;
+
+        return remainingTasks == 0
+                ? "Congratulations! You have completed all your tasks! :)"
+                : "You have " + remainingTasks + " tasks left to complete!";
+
     }
 }
