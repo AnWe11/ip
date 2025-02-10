@@ -51,10 +51,6 @@ public class DeadlineCase implements DefaultCase {
             data.saveData(taskManager);
         } catch (InvalidCommandException e) {
             System.out.println(e.getMessage());
-//            System.out.println("_____________________________________________");
-//            System.out.println("Input format for deadline tasks should be\ndeadline <Task Description> /by <deadline date>");
-//            System.out.println("_____________________________________________");
-            taskDescription = "";
             responseString = "Input format for deadline tasks should be\ndeadline <Task Description> /by <deadline date>";
         } catch (IOException e) {
             System.out.println("Unable to save deadline Task: " + e.getMessage());

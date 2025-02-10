@@ -14,37 +14,26 @@ import java.util.Scanner;
  */
 public class Luigi {
 
-//    public static void main(String[] args) throws InvalidCommandException, IOException {
-//
-//        try {
-//            LuigiUI luigiUI = new LuigiUI();
-//            TaskManager taskManager = new TaskManager();
-//            Data data = new Data();
-//            data.loadData(taskManager);
-//
-//            Scanner scanner = new Scanner(System.in);
-//            String input;
-//
-//            luigiUI.printUI();
-//
-//            while(true) {
-//                //Reads input from user and decides what to do
-//                input = scanner.nextLine();
-//                CommandsParser command = new CommandsParser(input, taskManager, data);
-//            }
-//        } catch (InvalidCommandException e) {
-//            System.out.println("Invalid Command Exception in main" + e.getMessage());
-//        } catch (IOException e) {
-//            System.out.println("IO Exception in main" + e.getMessage());
-//        }
-//    }
+    private static TaskManager taskManager;
+    private static Data data;
+    private static LuigiUI luigiUI;
+
+    public Luigi() {
+        this.taskManager = new TaskManager();
+        this.data = new Data();
+        this.luigiUI = new LuigiUI();
+    }
+
+    public static String getLuigiWelcomeUI() throws IOException {
+        return luigiUI.printUI();
+    }
 
     public static String getResponse(String userInput) throws InvalidCommandException, IOException {
         String responseString = "";
         
         try {
-            TaskManager taskManager = new TaskManager();
-            Data data = new Data();
+//            TaskManager taskManager = new TaskManager();
+//            Data data = new Data();
             data.loadData(taskManager);
 
             CommandsParser command = new CommandsParser(userInput, taskManager, data);

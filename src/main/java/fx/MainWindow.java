@@ -33,13 +33,19 @@ public class MainWindow extends AnchorPane {
     private Image luigiImage = new Image(this.getClass().getResourceAsStream("/images/Luigi.png"));
 
     @FXML
-    public void initialize() {
+    public void initialize() throws IOException {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        printLuigiUI();
     }
 
     /** Injects the Luigi instance */
     public void setLuigi(Luigi l) {
         luigi = l;
+    }
+
+    private void printLuigiUI() throws IOException {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(luigi.getLuigiWelcomeUI(), luigiImage));
     }
 
     /**

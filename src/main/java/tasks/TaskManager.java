@@ -21,12 +21,10 @@ public class  TaskManager {
      */
     public String listTasks() {
         StringBuilder str = new StringBuilder();
-//        str.append("_____________________________________________\n");
         str.append("Here are the tasks in your list:");
         for(int i = 0; i < tasksList.size(); i++) {
             str.append(i+1).append(". ").append(tasksList.get(i).getDescription()).append("\n");
         }
-//        str.append("_____________________________________________");
         return str.toString();
     }
 
@@ -40,10 +38,6 @@ public class  TaskManager {
         str.append(task.getDescription()).append("\n").append("You currently have ").append(tasksList.size())
                 .append(" task(s) in the list.");
         return str.toString();
-//        //System.out.println("_____________________________________________\n" + "Sure thing! I've added this task: ");
-//        System.out.println(task.getDescription());
-//        System.out.println("You currently have " + tasksList.size() + " task(s) in the list.");
-//        System.out.println("_____________________________________________");
     }
 
     public void loadTask(TasksDefault task) {
@@ -55,12 +49,9 @@ public class  TaskManager {
     }
 
     public String removeTask(int taskID) throws InvalidCommandException {
-//        System.out.println("_____________________________________________");
-//        System.out.println("Ok , I've deleted this task:");
-//        System.out.println(getTask(taskID).getDescription());
-//        System.out.println("_____________________________________________");
+        String str = "Ok , I've deleted this task:" + getTask(taskID - 1).getDescription();
         tasksList.remove(taskID - 1);
-        return "Ok , I've deleted this task:" + getTask(taskID).getDescription();
+        return str;
     }
 
     public List<TasksDefault> getTasksList() {

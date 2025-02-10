@@ -52,10 +52,6 @@ public class EventsCase implements DefaultCase {
             data.saveData(taskManager);
         } catch (InvalidCommandException e) {
             System.out.println(e.getMessage());
-//            System.out.println("_____________________________________________");
-//            System.out.println("Input format for events tasks should be\nevent <Task Description> /from <from date> /to <to date>");
-//            System.out.println("_____________________________________________");
-            taskDescription = "";
             responseString = "Input format for events tasks should be\nevent <Task Description> /from <from date> /to <to date>";
         } catch (IOException e) {
             System.out.println("Unable to save Events Task: " + e.getMessage());

@@ -41,9 +41,6 @@ public class DeleteCase implements DefaultCase {
             data.saveData(taskManager);
         } catch (InvalidCommandException e) {
             System.out.println(e.getMessage());
-            System.out.println("_____________________________________________");
-            System.out.println("Input format to delete task should be \ndelete <task ID>");
-            System.out.println("_____________________________________________\n");
             responseString = "Input format to delete task should be \ndelete <task ID>";
         } catch (IOException e) {
             System.out.println("Something went wrong when trying to save the deleted task: " + e.getMessage());

@@ -19,6 +19,5 @@ public class InvalidCase implements DefaultCase {
     @Override
     public String action() {
         return "Invalid command: " + error;
-//        throw new InvalidCommandException("Invalid command: " + error);
     }
 }

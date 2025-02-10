@@ -45,7 +45,6 @@ public class FindCase implements DefaultCase {
                 }
             }
 
-            System.out.println("_____________________________________________");
             if (!findTasksList.isEmpty()) {
                 str.append("Here are the tasks matching the keyword ").append(keyword).append(":").append("\n");
                 //System.out.println("Here are the tasks matching the keyword " + keyword + ":");
@@ -55,7 +54,7 @@ public class FindCase implements DefaultCase {
             } else {
                 str.append("No tasks matching the keyword '").append(keyword).append("' was found.").append("\n");
             }
-//            str.append("_____________________________________________\n");
+
         } catch (InvalidCommandException e) {
             System.out.println(e.getMessage());
             str.append(e.getMessage());
