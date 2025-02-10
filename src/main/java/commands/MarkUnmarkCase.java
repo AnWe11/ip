@@ -4,6 +4,7 @@ import exceptions.InvalidIDException;
 import storage.Data;
 import tasks.TaskManager;
 import tasks.TasksDefault;
+import utility.StringChecker;
 
 import java.io.IOException;
 
@@ -32,17 +33,7 @@ public class MarkUnmarkCase implements DefaultCase {
     public String action() throws InvalidCommandException {
         StringBuilder str = new StringBuilder();
         try {
-            int firstSpaceIndex = input.indexOf(" ");
-            //Return everything after first space or empty string if no space
-            if ((firstSpaceIndex == -1) || firstSpaceIndex == input.length() - 1) {
-                if (this.keyword == CommandsParser.Keywords.MARK) {
-                    throw new InvalidCommandException("You did not specify which task you would like to mark... :c");
-                } else {
-                    throw new InvalidCommandException("You did not specify which task you would like to unmark... :[");
-                }
-            }
-
-            int taskID = Integer.parseInt(input.substring(firstSpaceIndex + 1));
+            int taskID = Integer.parseInt(StringChecker.checkString(input));
             TasksDefault currTask;
             if (taskID >= 0 && taskID <= taskManager.getTotalTasks()) {
                 currTask = taskManager.getTask(taskID);
