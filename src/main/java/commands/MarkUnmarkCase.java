@@ -45,14 +45,14 @@ public class MarkUnmarkCase implements DefaultCase {
 
             currTask = taskManager.getTask(taskID);
             if (this.keyword == CommandsParser.Keywords.MARK) {
-                str.append("Nice work! I've marked this task as done:");
+                str.append("Nice work! I've marked this task as done:").append("\n");
                 currTask.markAsDone();
             } else {
-                str.append("Ok , I've unmarked this task:");
+                str.append("Ok , I've unmarked this task:").append("\n");
                 currTask.unmark();
             }
             data.saveData(this.taskManager);
-            str.append(currTask.getDescription());
+            str.append(currTask.getDescription()).append("\n");
             str.append(taskManager.getRemainingTasks());
         } catch (InvalidCommandException e) {
             str.append("Input format to mark task should be \nmark <task ID>");

@@ -5,6 +5,7 @@ import exceptions.InvalidCommandException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * Prints list of tasks.
@@ -21,9 +22,9 @@ public class  TaskManager {
      * Lists all the tasks in the list by iterating through the list.
      */
     public String listTasks() {
-
         return "Here are the tasks in your list: \n" +
-                tasksList.stream().map(TasksDefault::getDescription)
+                IntStream.range(0, tasksList.size())
+                        .mapToObj(i -> (i + 1) + ". " + tasksList.get(i).getDescription())
                         .collect(Collectors.joining("\n"));
     }
 
