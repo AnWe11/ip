@@ -70,7 +70,7 @@ public class FindCase implements DefaultCase {
         }
     }
 
-    public ArrayList<TasksDefault> filterTasksByType(String input) {
+    public List<TasksDefault> filterTasksByType(List<TasksDefault> taskList, String input) {
         String typeOfTasks;
         if (input.length() == 1) {
             typeOfTasks = input.toLowerCase();
@@ -78,6 +78,28 @@ public class FindCase implements DefaultCase {
             typeOfTasks = input.split(" ")[0].toLowerCase();
         }
 
+        switch (typeOfTasks) {
+        case "all" :
+            return taskList;
+        case "todo" :
+            return getTasksListByType(taskList, "[T]");
+        case "deadline" :
+            return getTasksListByType(taskList,"[D]");
+        case "event" :
+            return getTasksListByType(taskList, "[E]");
+        }
+        return null;
+    }
+
+    public List<TasksDefault> getTasksListByType(List<TasksDefault> taskList, String taskType) {
+        return taskList.stream().filter(task -> task.getTaskType().equals(taskType)).toList();
+    }
+
+    public List<TasksDefault> getTasksListByKeyword(List<TasksDefault> taskList, String keyword) {
+        return taskList.stream().filter(task -> task.getTaskDescription().contains(keyword)).toList();
+    }
+
+    public List<TasksDefault> getTaskListByDate(List<TasksDefault> taskList, String date) {
 
     }
 }
