@@ -7,6 +7,8 @@ import utility.StringChecker;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * Returns a task list with the matching keyword.
@@ -56,4 +58,45 @@ public class FindCase implements DefaultCase {
         }
         return str.toString();
     }
+
+    public String printList(ArrayList<TasksDefault> taskList) {
+        if (!taskList.isEmpty()) {
+            return "Here are the tasks found, \n" +
+            IntStream.range(0, taskList.size())
+                    .mapToObj(i -> (i+1) + ". " + taskList.get(i).getDescription())
+                    .collect(Collectors.joining("\n"));
+        } else {
+            return "No tasks were found.";
+        }
+    }
+
+    public ArrayList<TasksDefault> filterTasksByType(String input) {
+        String typeOfTasks;
+        if (input.length() == 1) {
+            typeOfTasks = input.toLowerCase();
+        } else {
+            typeOfTasks = input.split(" ")[0].toLowerCase();
+        }
+
+
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
