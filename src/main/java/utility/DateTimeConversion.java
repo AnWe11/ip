@@ -5,7 +5,10 @@ import exceptions.InvalidDateException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.Month;
 import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
+import java.util.Locale;
 
 /**
  * Returns date time in different formats.
@@ -69,6 +72,15 @@ public class DateTimeConversion {
             }
         } catch (Exception e) {
             throw new InvalidDateException("Invalid date format: " + inputDate, inputDate);
+        }
+    }
+
+    public static String getShortMonth(String fullMonth) {
+        try {
+            Month month = Month.valueOf(fullMonth.toUpperCase());
+            return month.getDisplayName(TextStyle.SHORT, Locale.ENGLISH);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Invalid month name: " + fullMonth);
         }
     }
 }
