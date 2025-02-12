@@ -68,7 +68,7 @@ public class TasksDefault {
     }
 
     public String getDeadlineDate() {
-        return "";
+        return null;
     }
 
 }
