@@ -24,10 +24,11 @@ public class Main extends Application {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
-            Scene scene = new Scene(ap);
+            Scene scene = new Scene(ap, 800, 600);
             stage.setScene(scene);
-            stage.setMinHeight(768);
-            stage.setMinWidth(1366);
+            stage.setMinHeight(600);
+            stage.setMinWidth(800);
+            stage.setTitle("Luigi Chatbot");
             fxmlLoader.<MainWindow>getController().setLuigi(luigi);  // inject the Duke instance
             stage.show();
         } catch (IOException e) {
