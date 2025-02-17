@@ -45,9 +45,12 @@ Its features include:
 8. "find /keyword <keyword> /month <month> /type <type of task>" - Filters the task list and returns tasks that matches all the descriptions. You need not include all 3 filters, one filter is enough, also the order of the filters do not matter.
    
    (E.g. find /keyword books) - Returns all tasks with "books" in their task description.
+
    (E.g. find /month December /keyword books) - Returns all deadline and event tasks which resides in December and have "books" in their task description.
+   
    (E.g. /type deadline /month March) - Returns all deadline tasks that resides in March.
+   
    (E.g. /keyword friends /month June /type event) - Returns all event tasks in the month of June that have "friends" in their task description.
    
-   The order of the /keyword /month /type does not matter, it is also unnecessary to use all the filter words. Any combination will work!
+The order of the /keyword /month /type does not matter, it is also unnecessary to use all the filter words. Any combination will work!
 
